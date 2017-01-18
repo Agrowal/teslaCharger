@@ -12,6 +12,14 @@
 		A223D9B21E3003C60003669B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B01E3003C60003669B /* Main.storyboard */; };
 		A223D9B41E3003C60003669B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B31E3003C60003669B /* Assets.xcassets */; };
 		A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B51E3003C60003669B /* LaunchScreen.storyboard */; };
+		A223D9DA1E300DF90003669B /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = A223D9D11E300DF90003669B /* Info-tvOS.plist */; };
+		A223D9DB1E300DF90003669B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A223D9D21E300DF90003669B /* Info.plist */; };
+		A223D9DC1E300DF90003669B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D31E300DF90003669B /* Result.swift */; };
+		A223D9DD1E300DF90003669B /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D41E300DF90003669B /* Socket.swift */; };
+		A223D9DE1E300DF90003669B /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D61E300DF90003669B /* TCPClient.swift */; };
+		A223D9DF1E300DF90003669B /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D71E300DF90003669B /* UDPClient.swift */; };
+		A223D9E01E300DF90003669B /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D81E300DF90003669B /* ytcpsocket.c */; };
+		A223D9E11E300DF90003669B /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D91E300DF90003669B /* yudpsocket.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,15 @@
 		A223D9B31E3003C60003669B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A223D9B61E3003C60003669B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A223D9B81E3003C60003669B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A223D9D11E300DF90003669B /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
+		A223D9D21E300DF90003669B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A223D9D31E300DF90003669B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		A223D9D41E300DF90003669B /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		A223D9D51E300DF90003669B /* SwiftSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftSocket.h; sourceTree = "<group>"; };
+		A223D9D61E300DF90003669B /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPClient.swift; sourceTree = "<group>"; };
+		A223D9D71E300DF90003669B /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPClient.swift; sourceTree = "<group>"; };
+		A223D9D81E300DF90003669B /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
+		A223D9D91E300DF90003669B /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +55,7 @@
 		A223D9A01E3003C60003669B = {
 			isa = PBXGroup;
 			children = (
+				A223D9D01E300DF90003669B /* SwiftSocket */,
 				A223D9AB1E3003C60003669B /* teslaCharger */,
 				A223D9AA1E3003C60003669B /* Products */,
 			);
@@ -62,6 +80,23 @@
 				A223D9B81E3003C60003669B /* Info.plist */,
 			);
 			path = teslaCharger;
+			sourceTree = "<group>";
+		};
+		A223D9D01E300DF90003669B /* SwiftSocket */ = {
+			isa = PBXGroup;
+			children = (
+				A223D9D11E300DF90003669B /* Info-tvOS.plist */,
+				A223D9D21E300DF90003669B /* Info.plist */,
+				A223D9D31E300DF90003669B /* Result.swift */,
+				A223D9D41E300DF90003669B /* Socket.swift */,
+				A223D9D51E300DF90003669B /* SwiftSocket.h */,
+				A223D9D61E300DF90003669B /* TCPClient.swift */,
+				A223D9D71E300DF90003669B /* UDPClient.swift */,
+				A223D9D81E300DF90003669B /* ytcpsocket.c */,
+				A223D9D91E300DF90003669B /* yudpsocket.c */,
+			);
+			name = SwiftSocket;
+			path = "../../../Downloads/SwiftSocket-master-2/SwiftSocket";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +160,8 @@
 			files = (
 				A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */,
 				A223D9B41E3003C60003669B /* Assets.xcassets in Resources */,
+				A223D9DA1E300DF90003669B /* Info-tvOS.plist in Resources */,
+				A223D9DB1E300DF90003669B /* Info.plist in Resources */,
 				A223D9B21E3003C60003669B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,8 +173,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A223D9E11E300DF90003669B /* yudpsocket.c in Sources */,
+				A223D9DF1E300DF90003669B /* UDPClient.swift in Sources */,
+				A223D9DD1E300DF90003669B /* Socket.swift in Sources */,
+				A223D9DE1E300DF90003669B /* TCPClient.swift in Sources */,
+				A223D9DC1E300DF90003669B /* Result.swift in Sources */,
 				A223D9AF1E3003C60003669B /* ViewController.swift in Sources */,
 				A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */,
+				A223D9E01E300DF90003669B /* ytcpsocket.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
