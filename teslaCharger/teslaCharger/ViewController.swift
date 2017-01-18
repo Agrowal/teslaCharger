@@ -48,11 +48,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var chargerStatusLabel: UILabel!
     
     @IBAction func onButtonPressed(_ sender: Any) {
-        chargerStatusLabel.text = sendDataAndRecieveAnwser(inputData: "ON")
+        chargerStatusLabel.text = "Charger status: " + sendDataAndRecieveAnwser(inputData: "ON")
     }
     
     @IBAction func offButtonPressed(_ sender: Any) {
-        chargerStatusLabel.text = sendDataAndRecieveAnwser(inputData: "OFF")
+        chargerStatusLabel.text = "Charger status: " + sendDataAndRecieveAnwser(inputData: "OFF")
     }
 
     override func viewDidLoad() {
