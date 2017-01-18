@@ -14,29 +14,51 @@ class ViewController: UIViewController {
 
     func establishConnection(){
         switch client.connect(timeout: 1) {
-                case .success:
-                switch client.send(string: "HELLO MOTO" ) {
-                    case .success:
-                        guard let data = client.read(1024*10) else { return }
+            case .success:
+                guard let data = client.read(1024*10) else { return }
+                
+                if let response = String(bytes: data, encoding: .utf8) {
+                    print(response)
+                }
         
-                        if let response = String(bytes: data, encoding: .utf8) {
-                            print(response)
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
             case .failure(let error):
             print(error)
         }
     }
     
+    func sendDataAndRecieveAnwser(inputData: String) -> String{
+        switch client.send(string: inputData ) {
+            case .success:
+                guard let data = client.read(1024*10) else { return "ERR"}
+                
+                if let response = String(bytes: data, encoding: .utf8) {
+                    var responseArr = response.components(separatedBy: ":")
+
+                    print(response)
+                    return responseArr[1]
+                }
+            case .failure(let error):
+                print(error)
+                return "ERR"
+            }
+        return "Oba case-y switcha maja return, czemu blad kompilatora?"
+    }
+    
+    
+    @IBOutlet weak var chargerStatusLabel: UILabel!
+    
     @IBAction func onButtonPressed(_ sender: Any) {
-        establishConnection()
+        chargerStatusLabel.text = sendDataAndRecieveAnwser(inputData: "ON")
+    }
+    
+    @IBAction func offButtonPressed(_ sender: Any) {
+        chargerStatusLabel.text = sendDataAndRecieveAnwser(inputData: "OFF")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        establishConnection()
     }
 
     override func didReceiveMemoryWarning() {
