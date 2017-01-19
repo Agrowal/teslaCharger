@@ -31,12 +31,9 @@ def clientthread(conn):
          
         #Receiving from client
         data = conn.recv(1024)
-        if data == 'ON':
-        	reply = 'OK:ONLINE'
-        elif data == 'OFF':
-        	reply = 'OK:OFFLINE'
-        else:
-        	reply = 'OK:' + data
+        print data
+        #reply = '\x06\x04\x00\x00\x01'
+        reply = data
         if not data: 
             break
      
