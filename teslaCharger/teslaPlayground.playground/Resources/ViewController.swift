@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
     
     let client = TCPClient(address: "localhost", port: 8888)
-    let modbus = Modbus()
 
     func establishConnection(){
         switch client.connect(timeout: 1) {
@@ -82,10 +81,7 @@ class ViewController: UIViewController {
         let request :[UInt8] = [0x05,0x01,0x90,0xFF,0x00]
         let requestData = Data(request)
         
-        //sendDataAndRecieveAnwser(inpuData: requestData, action: "ON")
-        let reqData = modbus.getRequest()
-        modbus.sendDataAndRecieveAnwser(inpuData: reqData)
-        
+        sendDataAndRecieveAnwser(inpuData: requestData, action: "ON")
         
     }
     
@@ -99,9 +95,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        // establishConnection()
-        modbus.establishConnection()
-        modbus.sendDataAndRecieveAnwser(inpuData: modbus.getRequest())
+        establishConnection()
     }
 
     override func didReceiveMemoryWarning() {
