@@ -13,6 +13,7 @@
 		A223D9B21E3003C60003669B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B01E3003C60003669B /* Main.storyboard */; };
 		A223D9B41E3003C60003669B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B31E3003C60003669B /* Assets.xcassets */; };
 		A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B51E3003C60003669B /* LaunchScreen.storyboard */; };
+		A25944311E34CD6400573F11 /* fasadaModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25944301E34CD6400573F11 /* fasadaModbus.swift */; };
 		A2BA55BF1E30B72400ADCF91 /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2BA55B61E30B72400ADCF91 /* Info-tvOS.plist */; };
 		A2BA55C01E30B72400ADCF91 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2BA55B71E30B72400ADCF91 /* Info.plist */; };
 		A2BA55C11E30B72400ADCF91 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA55B81E30B72400ADCF91 /* Result.swift */; };
@@ -25,7 +26,6 @@
 
 /* Begin PBXFileReference section */
 		A214A43C1E33F4F9003D2FBF /* Modbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modbus.swift; sourceTree = "<group>"; };
-		A214A43F1E34096B003D2FBF /* teslaPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = teslaPlayground.playground; sourceTree = "<group>"; };
 		A223D9A91E3003C60003669B /* teslaCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teslaCharger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223D9AC1E3003C60003669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A223D9AE1E3003C60003669B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +33,7 @@
 		A223D9B31E3003C60003669B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A223D9B61E3003C60003669B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A223D9B81E3003C60003669B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A25944301E34CD6400573F11 /* fasadaModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fasadaModbus.swift; path = teslaCharger/fasadaModbus.swift; sourceTree = "<group>"; };
 		A2BA55B61E30B72400ADCF91 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		A2BA55B71E30B72400ADCF91 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BA55B81E30B72400ADCF91 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -59,7 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				A214A43C1E33F4F9003D2FBF /* Modbus.swift */,
-				A214A43F1E34096B003D2FBF /* teslaPlayground.playground */,
+				A25944301E34CD6400573F11 /* fasadaModbus.swift */,
 			);
 			name = Modbus;
 			sourceTree = "<group>";
@@ -187,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2BA55C11E30B72400ADCF91 /* Result.swift in Sources */,
+				A25944311E34CD6400573F11 /* fasadaModbus.swift in Sources */,
 				A2BA55C51E30B72400ADCF91 /* ytcpsocket.c in Sources */,
 				A2BA55C31E30B72400ADCF91 /* TCPClient.swift in Sources */,
 				A2BA55C21E30B72400ADCF91 /* Socket.swift in Sources */,

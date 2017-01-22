@@ -35,65 +35,70 @@ class MBAP : byteTransformer {
     
     let transactionID :UInt16 = 1
     let protocolID :UInt16 = 0
-    var length :UInt16 = 6
+    var length :UInt16 = 6              // DO PRZYSZLEJ ZMIANY - TO NIE JEST WARTOSC STALA
     var slaveAddress :UInt8 = 1
     
-    var byteMBAPHeader :[UInt8] = []
+    var mbpaRequest :[UInt8] = []
     
     override init() {
         super.init()
-        makeMBAPRequest()
+        makeMbapRequest()
     }
     
-    func makeMBAPRequest() {
-        let MBAPHeaderItems :[UInt16]  = [transactionID,protocolID,length]
-        
-        for item in MBAPHeaderItems{
-            byteMBAPHeader.append(contentsOf: toByteArray(item, byteOrder: .BigEndian))
-        }
-        
-        byteMBAPHeader.append(slaveAddress)
+    func makeMbapRequest() {
+        mbpaRequest.removeAll()
+        mbpaRequest.append(contentsOf: toByteArray(transactionID, byteOrder: .BigEndian))
+        mbpaRequest.append(contentsOf: toByteArray(protocolID, byteOrder: .BigEndian))
+        mbpaRequest.append(contentsOf: toByteArray(length, byteOrder: .BigEndian))
+        mbpaRequest.append(slaveAddress)
     }
     
-    func getMBAP()-> [UInt8] {
-        return byteMBAPHeader
+    func setSlaveAddress(newSlaveAddress: Int) {
+        slaveAddress = UInt8(newSlaveAddress)
+        makeMbapRequest()
     }
     
-    func getMBAPData() -> Data {
-        return Data(bytes: byteMBAPHeader)
+    func getSlaveAddress() -> UInt8 {
+        return slaveAddress
+    }
+    
+    func getMbapRequest()-> [UInt8] {
+        return mbpaRequest
     }
     
 }
 
 class PDU : byteTransformer {
     
-    var functionCode :UInt8
-    var startingAddress :UInt16
-    var quantityOfRegisters :UInt16
+    var functionCode :UInt8 = 0
+    var startingAddress :UInt16 = 0
+    var quantityOfRegisters :UInt16 = 0
     
-    var bytePDURequest :[UInt8] = []
+    var coilInputsArr :[UInt8] = []
+    var holdingInputsArr :[UInt16] = []
     
-    init(functionCode: Int, startingAddress: Int, quantityOfRegisters: Int ){
+    var pduRequest :[UInt8] = []
+    
+    override init() {
+        // some code
+    }
+    
+    func setPDU(functionCode: Int, startingAddress: Int, quantityOfRegisters: Int ) {
         self.functionCode = UInt8(functionCode)
         self.startingAddress = UInt16(startingAddress)
         self.quantityOfRegisters = UInt16(quantityOfRegisters)
-        super.init()
-        makePDURequest()
-        
+        makePduRequest()
     }
     
-    func makePDURequest() {
-        bytePDURequest.append(functionCode)
-        bytePDURequest.append(contentsOf: toByteArray(startingAddress, byteOrder: .BigEndian))
-        bytePDURequest.append(contentsOf: toByteArray(quantityOfRegisters, byteOrder: .BigEndian))
+    func makePduRequest() {
+        pduRequest.removeAll()
+        pduRequest.append(functionCode)
+        pduRequest.append(contentsOf: toByteArray(startingAddress, byteOrder: .BigEndian))
+        pduRequest.append(contentsOf: toByteArray(quantityOfRegisters, byteOrder: .BigEndian))
     }
     
-    func getPDU() -> [UInt8] {
-        return bytePDURequest
-    }
-    
-    func getPDUData() -> Data {
-        return Data(bytes: bytePDURequest)
+    func getPduRequest() -> [UInt8] {
+        return pduRequest
     }
     
 }
@@ -109,20 +114,20 @@ class Modbus {
     
     init(){
         _MBAP = MBAP()
-        _PDU = PDU(functionCode: 3, startingAddress: 2, quantityOfRegisters: 6)
-        makeRequestUint()
-        makeRequestData()
+        _PDU = PDU()
         print("BUILD SUCCESSFUL")
     }
     
-    func makeRequestUint() {
-        requestUInt.append(contentsOf: _MBAP.getMBAP())
-        requestUInt.append(contentsOf: _PDU.getPDU())
-    }
+    func prepareRequest(functionCode: Int, startingAddress: Int, quantityOfRegisters: Int) {
 
-    func makeRequestData() {
-        requestData.append(_MBAP.getMBAPData())
-        requestData.append(_PDU.getPDUData())
+        _PDU.setPDU(functionCode: functionCode, startingAddress: startingAddress, quantityOfRegisters: quantityOfRegisters)
+        
+        //FILL BYTE ARRAY
+        requestUInt.append(contentsOf: _MBAP.getMbapRequest())
+        requestUInt.append(contentsOf: _PDU.getPduRequest())
+        
+        //FILL DATA OBJECT
+        requestData.append(contentsOf: requestUInt)
     }
     
     func getRequest() -> Data {
@@ -132,24 +137,32 @@ class Modbus {
     func establishConnection(){
         switch client.connect(timeout: 1) {
         case .success:
-          //  guard let data = client.read(1024*10) else { return }
+            guard let data = client.read(1024*10, timeout: 1) else { return }
             
-          //  if let response = String(bytes: data, encoding: .utf8) {
-           //     print(response)
-           // }
-            print("SUCCESS")
+            if let response = String(bytes: data, encoding: .utf8) {
+                print(response)
+            }
             
         case .failure(let error):
             print(error)
         }
     }
     
-    func sendDataAndRecieveAnwser(inpuData: Data){
-        switch client.send(data: inpuData) {
+    func sendPreparedRequest(){
+        switch client.send(data: requestData) {
         case .success:
             guard let data = client.read(1024*10) else { break}
             
-            print(data)
+            print("DATA: \(data)")
+            
+            let mbapLength = _MBAP.getMbapRequest().count
+            let mbapResponse = data[0..<mbapLength]
+            
+            let pduResponse = data.dropFirst(mbapLength)
+
+            
+            print("MBAP respones: \(mbapResponse)")
+            print("PDU respones: \(pduResponse) ")
             
         case .failure(let error):
             print(error)
