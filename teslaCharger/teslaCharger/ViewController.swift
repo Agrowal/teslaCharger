@@ -10,19 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //let modbus = Modbus()
-    
     let modbusInter = fasadaModbus()
     
     @IBOutlet weak var chargerStatusLabel: UILabel!
     
     @IBAction func onButtonPressed(_ sender: Any) {
-        // ON BUTTTON
+
         
         //modbus.prepareRequest(functionCode: 6, startingAddress: 8, quantityOfRegisters: 170)
         //modbus.sendPreparedRequest()
         
-        modbusInter.setChargingON()
+        modbusInter.setChargingOnOff(OnOff: .ON)
         
     }
     

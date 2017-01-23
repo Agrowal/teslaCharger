@@ -105,7 +105,7 @@ class PDU : byteTransformer {
 
 class Modbus {
     
-    let client = TCPClient(address: "192.168.8.3", port: 1502)
+    let client = TCPClient(address: "127.0.0.1", port: 1502)
     
     var _MBAP :MBAP
     var _PDU :PDU
@@ -151,7 +151,7 @@ class Modbus {
     func sendPreparedRequest(){
         switch client.send(data: requestData) {
         case .success:
-            guard let data = client.read(1024*10) else { break}
+            guard let data = client.read(1024*10, timeout: 5) else { break}
             
             print("DATA: \(data)")
             

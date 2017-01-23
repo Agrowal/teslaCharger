@@ -8,16 +8,30 @@
 
 import Foundation
 
-class fasadaModbus : Modbus{
+class fasadaModbus {
     
-    override init(){
-        super.init()
-        super.establishConnection()
+    let modbus :Modbus
+    
+    let coilZero = Int(0x0000)
+    let coilOne = Int(0xFF00)
+    
+    enum OnOff {
+        case ON
+        case OFF
     }
     
-    func setChargingON() {
-        super.prepareRequest(functionCode: 5, startingAddress: 4, quantityOfRegisters: 65280)
-        super.sendPreparedRequest()
+    init(){
+        modbus = Modbus()
+        modbus.establishConnection()
     }
+    
+   
+    func setChargingOnOff(OnOff: OnOff) {
+        let state = (OnOff == .ON) ? coilOne : coilZero
+        modbus.prepareRequest(functionCode: 5, startingAddress: 4, quantityOfRegisters: state)
+        modbus.sendPreparedRequest()
+    }
+
+    
     
 }
