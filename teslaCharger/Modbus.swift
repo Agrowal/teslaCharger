@@ -33,10 +33,10 @@ class byteTransformer{
 
 class MBAP : byteTransformer {
     
-    let transactionID :UInt16 = 1
-    let protocolID :UInt16 = 0
-    var length :UInt16 = 6              // DO PRZYSZLEJ ZMIANY - TO NIE JEST WARTOSC STALA
-    var slaveAddress :UInt8 = 1
+    private let transactionID :UInt16 = 1
+    private let protocolID :UInt16 = 0
+    private var length :UInt16 = 6              // DO PRZYSZLEJ ZMIANY - TO NIE JEST WARTOSC STALA
+    private var slaveAddress :UInt8 = 1
     
     var mbpaRequest :[UInt8] = []
     
@@ -70,12 +70,9 @@ class MBAP : byteTransformer {
 
 class PDU : byteTransformer {
     
-    var functionCode :UInt8 = 0
-    var startingAddress :UInt16 = 0
-    var quantityOfRegisters :UInt16 = 0
-    
-    var coilInputsArr :[UInt8] = []
-    var holdingInputsArr :[UInt16] = []
+    private var functionCode :UInt8 = 0
+    private var startingAddress :UInt16 = 0
+    private var pduData :[UInt8] = []
     
     var pduRequest :[UInt8] = []
     
@@ -83,10 +80,10 @@ class PDU : byteTransformer {
         // some code
     }
     
-    func setPDU(functionCode: Int, startingAddress: Int, quantityOfRegisters: Int ) {
+    func setPDU(functionCode: Int, startingAddress: Int, pduData: [UInt8] ) {
         self.functionCode = UInt8(functionCode)
         self.startingAddress = UInt16(startingAddress)
-        self.quantityOfRegisters = UInt16(quantityOfRegisters)
+        self.pduData = pduData
         makePduRequest()
     }
     
@@ -94,7 +91,7 @@ class PDU : byteTransformer {
         pduRequest.removeAll()
         pduRequest.append(functionCode)
         pduRequest.append(contentsOf: toByteArray(startingAddress, byteOrder: .BigEndian))
-        pduRequest.append(contentsOf: toByteArray(quantityOfRegisters, byteOrder: .BigEndian))
+        pduRequest.append(contentsOf: pduData)
     }
     
     func getPduRequest() -> [UInt8] {
@@ -105,22 +102,94 @@ class PDU : byteTransformer {
 
 class Modbus {
     
+    let _byteTransformer = byteTransformer()
+    let _MBAP = MBAP()
+    let _PDU = PDU()
+    
     let client = TCPClient(address: "127.0.0.1", port: 1502)
     
-    var _MBAP :MBAP
-    var _PDU :PDU
+    enum functionCodes: Int {
+        case ReadCoils=1
+        case ReadDiscreteInputs=2
+        case ReadHoldingRegisters=3
+        case ReadInputRegisters=4
+        
+        case WriteSingleCoil=5
+        case WriteSingleRegister=6
+        case WriteMultipleCoils=15
+        case WriteMultipleRegisters=16
+        
+        case ReadExceptionStatus_SerialLineOnly=7
+        case Diagnostics_SerialLineOnly=8
+        case GetCommEventCounter_SerialLineOnly=11
+        case GetCommEventLog_SerialLineOnly=12
+        case ReportSlaveID_SerialLineOnly=17
+        
+        case ReadFileRecord=20
+        case WriteFileRecord=21
+        
+        case MaskWriteRegister=22
+        case ReadWriteMultipleRegisters=23
+        case ReadFIFOQueue=24
+        case EncapsulatedInterfaceTransport=43
+        case CANopenGeneralReferenceRequestandResponsePDU=13
+        case ReadDeviceIdentification=14
+    }
+    
+    enum coilValue :UInt16{
+        case ONE = 65280 //0xFF00
+        case ZERO = 0
+    }
+    
+
     var requestUInt :[UInt8] = []
     var requestData :Data = Data()
     
     init(){
-        _MBAP = MBAP()
-        _PDU = PDU()
-        print("BUILD SUCCESSFUL")
     }
     
-    func prepareRequest(functionCode: Int, startingAddress: Int, quantityOfRegisters: Int) {
+    
+    func readData(functionCode: functionCodes, startingAddress: Int, quantityToRead: Int) {
+        let readCodes = [1,2,3,4]
+        if readCodes.contains(functionCode.rawValue){
+            let quantityAsByteArray = _byteTransformer.toByteArray(UInt16(quantityToRead), byteOrder: .BigEndian)
+            
+             _PDU.setPDU(functionCode: functionCode.rawValue, startingAddress: startingAddress, pduData: quantityAsByteArray)
+            prepareRequest()
+            sendPreparedRequest()
+            return
+        }
+        else{
+            print("WRONG FUNCTION CODE")
+            return
+        }
+    }
+    
+    func WriteSingleCoil(startingAddress: Int, coilValue: coilValue) {
+        let coilValueAsByteArray = _byteTransformer.toByteArray(coilValue.rawValue, byteOrder: .BigEndian)
+        
+        _PDU.setPDU(functionCode: functionCodes.WriteSingleCoil.rawValue, startingAddress: startingAddress, pduData: coilValueAsByteArray)
+        prepareRequest()
+        sendPreparedRequest()
+        return
 
-        _PDU.setPDU(functionCode: functionCode, startingAddress: startingAddress, quantityOfRegisters: quantityOfRegisters)
+    }
+    
+    func WriteSingleRegister(startingAddress: Int, registerValue: Int) {
+        let registerValueAsByteArray = _byteTransformer.toByteArray(UInt16(registerValue), byteOrder: .BigEndian)
+        
+        _PDU.setPDU(functionCode: functionCodes.WriteSingleRegister.rawValue, startingAddress: startingAddress, pduData: registerValueAsByteArray)
+        prepareRequest()
+        sendPreparedRequest()
+        return
+        
+    }
+    
+    
+    func prepareRequest() {
+        //CLEAN BYTE ARRAYS
+        requestUInt.removeAll()
+        requestData.removeAll()
         
         //FILL BYTE ARRAY
         requestUInt.append(contentsOf: _MBAP.getMbapRequest())
@@ -128,24 +197,6 @@ class Modbus {
         
         //FILL DATA OBJECT
         requestData.append(contentsOf: requestUInt)
-    }
-    
-    func getRequest() -> Data {
-        return requestData
-    }
-    
-    func establishConnection(){
-        switch client.connect(timeout: 1) {
-        case .success:
-            guard let data = client.read(1024*10, timeout: 1) else { return }
-            
-            if let response = String(bytes: data, encoding: .utf8) {
-                print(response)
-            }
-            
-        case .failure(let error):
-            print(error)
-        }
     }
     
     func sendPreparedRequest(){
@@ -157,9 +208,7 @@ class Modbus {
             
             let mbapLength = _MBAP.getMbapRequest().count
             let mbapResponse = data[0..<mbapLength]
-            
             let pduResponse = data.dropFirst(mbapLength)
-
             
             print("MBAP respones: \(mbapResponse)")
             print("PDU respones: \(pduResponse) ")
@@ -168,6 +217,22 @@ class Modbus {
             print(error)
         }
     }
+    
+    func establishConnection(){
+        switch client.connect(timeout: 1) {
+        case .success:
+            guard let data = client.read(1024*10, timeout: 1) else { return }
+            
+            if let serverResponse = String(bytes: data, encoding: .utf8) {
+                print(serverResponse)
+            }
+            
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
+
     
     
 }

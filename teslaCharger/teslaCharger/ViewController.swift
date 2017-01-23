@@ -26,14 +26,13 @@ class ViewController: UIViewController {
     
     @IBAction func offButtonPressed(_ sender: Any) {
         //OFF BUTTON
+        //modbusInter.setChargingOnOff(OnOff: .OFF)
+        modbusInter.test()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        // establishConnection()
-        // modbus.establishConnection()
     }
 
     override func didReceiveMemoryWarning() {

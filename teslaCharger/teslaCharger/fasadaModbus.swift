@@ -27,10 +27,13 @@ class fasadaModbus {
     
    
     func setChargingOnOff(OnOff: OnOff) {
-        let state = (OnOff == .ON) ? coilOne : coilZero
-        modbus.prepareRequest(functionCode: 5, startingAddress: 4, quantityOfRegisters: state)
-        modbus.sendPreparedRequest()
+        (OnOff == .ON) ? modbus.WriteSingleCoil(startingAddress: 4, coilValue: .ONE) : modbus.WriteSingleCoil(startingAddress: 4, coilValue: .ZERO)
     }
+    
+    func test(){
+        modbus.WriteSingleRegister(startingAddress: 3, registerValue: 1024)
+    }
+
 
     
     
