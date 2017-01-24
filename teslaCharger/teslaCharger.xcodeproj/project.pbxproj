@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */; };
+		A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B01E37FCC7007298E1 /* ModbusClient.swift */; };
+		A22335B61E37FCC8007298E1 /* modbusMbap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B11E37FCC7007298E1 /* modbusMbap.swift */; };
+		A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B21E37FCC7007298E1 /* modbusPdu.swift */; };
+		A22335B81E37FCC8007298E1 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B31E37FCC8007298E1 /* utilities.swift */; };
 		A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AC1E3003C60003669B /* AppDelegate.swift */; };
 		A223D9AF1E3003C60003669B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AE1E3003C60003669B /* ViewController.swift */; };
 		A223D9B21E3003C60003669B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B01E3003C60003669B /* Main.storyboard */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fasadaModbus.swift; sourceTree = "<group>"; };
+		A22335B01E37FCC7007298E1 /* ModbusClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModbusClient.swift; sourceTree = "<group>"; };
+		A22335B11E37FCC7007298E1 /* modbusMbap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusMbap.swift; sourceTree = "<group>"; };
+		A22335B21E37FCC7007298E1 /* modbusPdu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusPdu.swift; sourceTree = "<group>"; };
+		A22335B31E37FCC8007298E1 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		A223D9A91E3003C60003669B /* teslaCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teslaCharger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223D9AC1E3003C60003669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A223D9AE1E3003C60003669B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,12 +62,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A22335AE1E37FCC7007298E1 /* Modbus */ = {
+			isa = PBXGroup;
+			children = (
+				A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */,
+				A22335B01E37FCC7007298E1 /* ModbusClient.swift */,
+				A22335B11E37FCC7007298E1 /* modbusMbap.swift */,
+				A22335B21E37FCC7007298E1 /* modbusPdu.swift */,
+				A22335B31E37FCC8007298E1 /* utilities.swift */,
+			);
+			name = Modbus;
+			path = teslaCharger/Modbus;
+			sourceTree = "<group>";
+		};
 		A223D9A01E3003C60003669B = {
 			isa = PBXGroup;
 			children = (
 				A223D9D01E300DF90003669B /* SwiftSocket */,
 				A223D9AB1E3003C60003669B /* teslaCharger */,
 				A223D9AA1E3003C60003669B /* Products */,
+				A22335AE1E37FCC7007298E1 /* Modbus */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,11 +198,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A223D9E11E300DF90003669B /* yudpsocket.c in Sources */,
+				A22335B61E37FCC8007298E1 /* modbusMbap.swift in Sources */,
 				A223D9DF1E300DF90003669B /* UDPClient.swift in Sources */,
+				A22335B81E37FCC8007298E1 /* utilities.swift in Sources */,
+				A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */,
 				A223D9DD1E300DF90003669B /* Socket.swift in Sources */,
+				A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */,
 				A223D9DE1E300DF90003669B /* TCPClient.swift in Sources */,
 				A223D9DC1E300DF90003669B /* Result.swift in Sources */,
 				A223D9AF1E3003C60003669B /* ViewController.swift in Sources */,
+				A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */,
 				A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */,
 				A223D9E01E300DF90003669B /* ytcpsocket.c in Sources */,
 			);
@@ -342,6 +371,7 @@
 				A223D9BD1E3003C60003669B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
