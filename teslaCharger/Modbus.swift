@@ -35,15 +35,15 @@ class MBAP : byteTransformer {
     
     private let transactionID :UInt16 = 1
     private let protocolID :UInt16 = 0
-    private var length :UInt16 = 6              // DO PRZYSZLEJ ZMIANY - TO NIE JEST WARTOSC STALA
+    private var length :UInt16 = 6
     private var slaveAddress :UInt8 = 1
     
     var mbpaRequest :[UInt8] = []
     
-    override init() {
-        super.init()
-        makeMbapRequest()
+    override init(){
+        
     }
+    
     
     func makeMbapRequest() {
         mbpaRequest.removeAll()
@@ -60,6 +60,11 @@ class MBAP : byteTransformer {
     
     func getSlaveAddress() -> UInt8 {
         return slaveAddress
+    }
+    
+    func setLength(newLength: Int) {
+        length = UInt16(newLength)
+        makeMbapRequest()
     }
     
     func getMbapRequest()-> [UInt8] {
@@ -100,9 +105,8 @@ class PDU : byteTransformer {
     
 }
 
-class Modbus {
+class Modbus: byteTransformer {
     
-    let _byteTransformer = byteTransformer()
     let _MBAP = MBAP()
     let _PDU = PDU()
     
@@ -145,14 +149,14 @@ class Modbus {
     var requestUInt :[UInt8] = []
     var requestData :Data = Data()
     
-    init(){
+    override init(){
     }
     
     
     func readData(functionCode: functionCodes, startingAddress: Int, quantityToRead: Int) {
         let readCodes = [1,2,3,4]
         if readCodes.contains(functionCode.rawValue){
-            let quantityAsByteArray = _byteTransformer.toByteArray(UInt16(quantityToRead), byteOrder: .BigEndian)
+            let quantityAsByteArray = toByteArray(UInt16(quantityToRead), byteOrder: .BigEndian)
             
              _PDU.setPDU(functionCode: functionCode.rawValue, startingAddress: startingAddress, pduData: quantityAsByteArray)
             prepareRequest()
@@ -166,7 +170,7 @@ class Modbus {
     }
     
     func WriteSingleCoil(startingAddress: Int, coilValue: coilValue) {
-        let coilValueAsByteArray = _byteTransformer.toByteArray(coilValue.rawValue, byteOrder: .BigEndian)
+        let coilValueAsByteArray = toByteArray(coilValue.rawValue, byteOrder: .BigEndian)
         
         _PDU.setPDU(functionCode: functionCodes.WriteSingleCoil.rawValue, startingAddress: startingAddress, pduData: coilValueAsByteArray)
         prepareRequest()
@@ -176,9 +180,30 @@ class Modbus {
     }
     
     func WriteSingleRegister(startingAddress: Int, registerValue: Int) {
-        let registerValueAsByteArray = _byteTransformer.toByteArray(UInt16(registerValue), byteOrder: .BigEndian)
+        let registerValueAsByteArray = toByteArray(UInt16(registerValue), byteOrder: .BigEndian)
         
         _PDU.setPDU(functionCode: functionCodes.WriteSingleRegister.rawValue, startingAddress: startingAddress, pduData: registerValueAsByteArray)
+        prepareRequest()
+        sendPreparedRequest()
+        return
+        
+    }
+    
+    func WriteMultipleRegisters(startingAddress: Int, registerValues: [Int]) {
+        
+        let quantityOfRegisters = UInt16(registerValues.count)
+        let quantityAsByteArray = toByteArray(quantityOfRegisters, byteOrder: .BigEndian)
+        
+        let byteCount = [UInt8(quantityOfRegisters*2)]
+        
+        var registerValuesAsByteArray:[UInt8] = []
+        for value in registerValues {
+            registerValuesAsByteArray.append(contentsOf: toByteArray(UInt16(value), byteOrder: .BigEndian))
+        }
+        
+        let pduData = quantityAsByteArray + byteCount + registerValuesAsByteArray
+        
+        _PDU.setPDU(functionCode: functionCodes.WriteMultipleRegisters.rawValue, startingAddress: startingAddress, pduData: pduData)
         prepareRequest()
         sendPreparedRequest()
         return
@@ -192,8 +217,13 @@ class Modbus {
         requestData.removeAll()
         
         //FILL BYTE ARRAY
+        let mbapLengthValue = _PDU.getPduRequest().count + 1
+        _MBAP.setLength(newLength: mbapLengthValue)
         requestUInt.append(contentsOf: _MBAP.getMbapRequest())
+        
         requestUInt.append(contentsOf: _PDU.getPduRequest())
+        print("SENDING: \(requestUInt)")
+        
         
         //FILL DATA OBJECT
         requestData.append(contentsOf: requestUInt)
@@ -204,12 +234,11 @@ class Modbus {
         case .success:
             guard let data = client.read(1024*10, timeout: 5) else { break}
             
-            print("DATA: \(data)")
-            
             let mbapLength = _MBAP.getMbapRequest().count
             let mbapResponse = data[0..<mbapLength]
             let pduResponse = data.dropFirst(mbapLength)
             
+            print("RESPONSE DATA:")
             print("MBAP respones: \(mbapResponse)")
             print("PDU respones: \(pduResponse) ")
             

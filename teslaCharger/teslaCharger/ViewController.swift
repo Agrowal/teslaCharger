@@ -15,19 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var chargerStatusLabel: UILabel!
     
     @IBAction func onButtonPressed(_ sender: Any) {
-
-        
-        //modbus.prepareRequest(functionCode: 6, startingAddress: 8, quantityOfRegisters: 170)
-        //modbus.sendPreparedRequest()
-        
+        //ON BUTTON
         modbusInter.setChargingOnOff(OnOff: .ON)
-        
     }
     
     @IBAction func offButtonPressed(_ sender: Any) {
         //OFF BUTTON
-        //modbusInter.setChargingOnOff(OnOff: .OFF)
-        modbusInter.test()
+        modbusInter.setChargingOnOff(OnOff: .OFF)
     }
 
     override func viewDidLoad() {
