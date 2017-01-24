@@ -10,18 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let modbusInter = fasadaModbus()
+    let modbusTeslaCharger = fasadaModbus()
     
     @IBOutlet weak var chargerStatusLabel: UILabel!
     
     @IBAction func onButtonPressed(_ sender: Any) {
         //ON BUTTON
-        modbusInter.setChargingOnOff(OnOff: .ON)
+        modbusTeslaCharger.setChargingOnOff(OnOff: .ON)
     }
     
     @IBAction func offButtonPressed(_ sender: Any) {
         //OFF BUTTON
-        modbusInter.setChargingOnOff(OnOff: .OFF)
+        modbusTeslaCharger.setChargingOnOff(OnOff: .OFF)
     }
 
     override func viewDidLoad() {

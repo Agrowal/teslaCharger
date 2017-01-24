@@ -15,6 +15,9 @@ class ModbusClient: Utilities {
     
     let client :TCPClient
     
+    var requestUInt :[UInt8] = []
+    var requestData :Data = Data()
+    
     enum functionCodes: Int {
         case ReadCoils=1
         case ReadDiscreteInputs=2
@@ -48,10 +51,6 @@ class ModbusClient: Utilities {
         case ZERO = 0
     }
     
-
-    var requestUInt :[UInt8] = []
-    var requestData :Data = Data()
-    
     init(address: String, port: Int32){
         client = TCPClient(address: address, port: port)
     }
@@ -77,8 +76,8 @@ class ModbusClient: Utilities {
         let coilValueAsByteArray = toByteArray(coilValue.rawValue, byteOrder: .BigEndian)
         
         _PDU.setPDU(functionCode: functionCodes.WriteSingleCoil.rawValue, startingAddress: startingAddress, pduData: coilValueAsByteArray)
-        prepareRequest()
-        sendPreparedRequest()
+
+        sendPreparedRequest(request: preparedRequest())
         return
 
     }
@@ -87,8 +86,8 @@ class ModbusClient: Utilities {
         let registerValueAsByteArray = toByteArray(UInt16(registerValue), byteOrder: .BigEndian)
         
         _PDU.setPDU(functionCode: functionCodes.WriteSingleRegister.rawValue, startingAddress: startingAddress, pduData: registerValueAsByteArray)
-        prepareRequest()
-        sendPreparedRequest()
+
+        sendPreparedRequest(request: preparedRequest())
         return
         
     }
@@ -108,18 +107,18 @@ class ModbusClient: Utilities {
         let pduData = quantityAsByteArray + byteCount + registerValuesAsByteArray
         
         _PDU.setPDU(functionCode: functionCodes.WriteMultipleRegisters.rawValue, startingAddress: startingAddress, pduData: pduData)
-        prepareRequest()
-        sendPreparedRequest()
+
+        sendPreparedRequest(request: preparedRequest())
         return
         
     }
     
     
     
-    func prepareRequest() {
-        //CLEAN BYTE ARRAYS
-        requestUInt.removeAll()
-        requestData.removeAll()
+    func preparedRequest() -> Data{
+        //INITIALIZE EMPTY ARRAYS
+        var requestUInt :[UInt8] = []
+        var requestData :Data = Data()
         
         //FILL BYTE ARRAY
         let mbapLengthValue = _PDU.getPduRequest().count + 1
@@ -132,10 +131,11 @@ class ModbusClient: Utilities {
         
         //FILL DATA OBJECT
         requestData.append(contentsOf: requestUInt)
+        return requestData
     }
     
-    func sendPreparedRequest(){
-        switch client.send(data: requestData) {
+    func sendPreparedRequest(request: Data){
+        switch client.send(data: request) {
         case .success:
             guard let data = client.read(1024*10, timeout: 5) else { break}
             
