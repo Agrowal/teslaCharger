@@ -30,17 +30,6 @@ class fasadaModbus {
         (OnOff == .ON) ? modbus.WriteSingleCoil(startingAddress: 4, coilValue: .ONE) : modbus.WriteSingleCoil(startingAddress: 4, coilValue: .ZERO)
     }
     
-    
-    // ONLY FOR TESTING
-    func test(){
-        modbus.WriteSingleRegister(startingAddress: 3, registerValue: 1024)
-    }
-    
-    func write3registers(startingAddress: Int, intArray: [Int]) {
-        modbus.WriteMultipleRegisters(startingAddress: startingAddress, registerValues: intArray)
-    }
-
-
-    
+        
     
 }
