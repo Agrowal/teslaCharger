@@ -17,14 +17,17 @@
 		A223D9B21E3003C60003669B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B01E3003C60003669B /* Main.storyboard */; };
 		A223D9B41E3003C60003669B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B31E3003C60003669B /* Assets.xcassets */; };
 		A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B51E3003C60003669B /* LaunchScreen.storyboard */; };
-		A223D9DA1E300DF90003669B /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = A223D9D11E300DF90003669B /* Info-tvOS.plist */; };
-		A223D9DB1E300DF90003669B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A223D9D21E300DF90003669B /* Info.plist */; };
-		A223D9DC1E300DF90003669B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D31E300DF90003669B /* Result.swift */; };
-		A223D9DD1E300DF90003669B /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D41E300DF90003669B /* Socket.swift */; };
-		A223D9DE1E300DF90003669B /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D61E300DF90003669B /* TCPClient.swift */; };
-		A223D9DF1E300DF90003669B /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D71E300DF90003669B /* UDPClient.swift */; };
-		A223D9E01E300DF90003669B /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D81E300DF90003669B /* ytcpsocket.c */; };
-		A223D9E11E300DF90003669B /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A223D9D91E300DF90003669B /* yudpsocket.c */; };
+		A2AC21B21E3B68D800A59667 /* interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B11E3B68D800A59667 /* interfaces.swift */; };
+		A2AC21B41E3B6C0300A59667 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B31E3B6C0300A59667 /* constants.swift */; };
+		A2AC21BF1E3B6DA200A59667 /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2AC21B61E3B6DA200A59667 /* Info-tvOS.plist */; };
+		A2AC21C01E3B6DA200A59667 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2AC21B71E3B6DA200A59667 /* Info.plist */; };
+		A2AC21C11E3B6DA200A59667 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B81E3B6DA200A59667 /* Result.swift */; };
+		A2AC21C21E3B6DA200A59667 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B91E3B6DA200A59667 /* Socket.swift */; };
+		A2AC21C31E3B6DA200A59667 /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BB1E3B6DA200A59667 /* TCPClient.swift */; };
+		A2AC21C41E3B6DA200A59667 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BC1E3B6DA200A59667 /* UDPClient.swift */; };
+		A2AC21C51E3B6DA200A59667 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BD1E3B6DA200A59667 /* ytcpsocket.c */; };
+		A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BE1E3B6DA200A59667 /* yudpsocket.c */; };
+		A2E530A11E3B830E000898A6 /* pdu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E530A01E3B830E000898A6 /* pdu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,15 +43,19 @@
 		A223D9B31E3003C60003669B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A223D9B61E3003C60003669B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A223D9B81E3003C60003669B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A223D9D11E300DF90003669B /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
-		A223D9D21E300DF90003669B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A223D9D31E300DF90003669B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		A223D9D41E300DF90003669B /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
-		A223D9D51E300DF90003669B /* SwiftSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftSocket.h; sourceTree = "<group>"; };
-		A223D9D61E300DF90003669B /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPClient.swift; sourceTree = "<group>"; };
-		A223D9D71E300DF90003669B /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPClient.swift; sourceTree = "<group>"; };
-		A223D9D81E300DF90003669B /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
-		A223D9D91E300DF90003669B /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
+		A2AC21B11E3B68D800A59667 /* interfaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = interfaces.swift; sourceTree = "<group>"; };
+		A2AC21B31E3B6C0300A59667 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		A2AC21B51E3B6DA100A59667 /* teslaCharger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "teslaCharger-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2AC21B61E3B6DA200A59667 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-tvOS.plist"; path = "teslaCharger/SwiftSocket/Info-tvOS.plist"; sourceTree = SOURCE_ROOT; };
+		A2AC21B71E3B6DA200A59667 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = teslaCharger/SwiftSocket/Info.plist; sourceTree = SOURCE_ROOT; };
+		A2AC21B81E3B6DA200A59667 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = teslaCharger/SwiftSocket/Result.swift; sourceTree = SOURCE_ROOT; };
+		A2AC21B91E3B6DA200A59667 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = teslaCharger/SwiftSocket/Socket.swift; sourceTree = SOURCE_ROOT; };
+		A2AC21BA1E3B6DA200A59667 /* SwiftSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwiftSocket.h; path = teslaCharger/SwiftSocket/SwiftSocket.h; sourceTree = SOURCE_ROOT; };
+		A2AC21BB1E3B6DA200A59667 /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TCPClient.swift; path = teslaCharger/SwiftSocket/TCPClient.swift; sourceTree = SOURCE_ROOT; };
+		A2AC21BC1E3B6DA200A59667 /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDPClient.swift; path = teslaCharger/SwiftSocket/UDPClient.swift; sourceTree = SOURCE_ROOT; };
+		A2AC21BD1E3B6DA200A59667 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ytcpsocket.c; path = teslaCharger/SwiftSocket/ytcpsocket.c; sourceTree = SOURCE_ROOT; };
+		A2AC21BE1E3B6DA200A59667 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yudpsocket.c; path = teslaCharger/SwiftSocket/yudpsocket.c; sourceTree = SOURCE_ROOT; };
+		A2E530A01E3B830E000898A6 /* pdu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,11 +72,13 @@
 		A22335AE1E37FCC7007298E1 /* Modbus */ = {
 			isa = PBXGroup;
 			children = (
+				A2AC21B31E3B6C0300A59667 /* constants.swift */,
 				A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */,
 				A22335B01E37FCC7007298E1 /* ModbusClient.swift */,
 				A22335B11E37FCC7007298E1 /* modbusMbap.swift */,
 				A22335B21E37FCC7007298E1 /* modbusPdu.swift */,
 				A22335B31E37FCC8007298E1 /* utilities.swift */,
+				A2AC21B11E3B68D800A59667 /* interfaces.swift */,
 			);
 			name = Modbus;
 			path = teslaCharger/Modbus;
@@ -78,6 +87,7 @@
 		A223D9A01E3003C60003669B = {
 			isa = PBXGroup;
 			children = (
+				A2E5309F1E3B82FC000898A6 /* Modbus2 */,
 				A223D9D01E300DF90003669B /* SwiftSocket */,
 				A223D9AB1E3003C60003669B /* teslaCharger */,
 				A223D9AA1E3003C60003669B /* Products */,
@@ -109,18 +119,27 @@
 		A223D9D01E300DF90003669B /* SwiftSocket */ = {
 			isa = PBXGroup;
 			children = (
-				A223D9D11E300DF90003669B /* Info-tvOS.plist */,
-				A223D9D21E300DF90003669B /* Info.plist */,
-				A223D9D31E300DF90003669B /* Result.swift */,
-				A223D9D41E300DF90003669B /* Socket.swift */,
-				A223D9D51E300DF90003669B /* SwiftSocket.h */,
-				A223D9D61E300DF90003669B /* TCPClient.swift */,
-				A223D9D71E300DF90003669B /* UDPClient.swift */,
-				A223D9D81E300DF90003669B /* ytcpsocket.c */,
-				A223D9D91E300DF90003669B /* yudpsocket.c */,
+				A2AC21B61E3B6DA200A59667 /* Info-tvOS.plist */,
+				A2AC21B71E3B6DA200A59667 /* Info.plist */,
+				A2AC21B81E3B6DA200A59667 /* Result.swift */,
+				A2AC21B91E3B6DA200A59667 /* Socket.swift */,
+				A2AC21BA1E3B6DA200A59667 /* SwiftSocket.h */,
+				A2AC21BB1E3B6DA200A59667 /* TCPClient.swift */,
+				A2AC21BC1E3B6DA200A59667 /* UDPClient.swift */,
+				A2AC21BD1E3B6DA200A59667 /* ytcpsocket.c */,
+				A2AC21BE1E3B6DA200A59667 /* yudpsocket.c */,
+				A2AC21B51E3B6DA100A59667 /* teslaCharger-Bridging-Header.h */,
 			);
 			name = SwiftSocket;
-			path = "../../../Downloads/SwiftSocket-master-2/SwiftSocket";
+			path = teslaCharger/Modbus;
+			sourceTree = SOURCE_ROOT;
+		};
+		A2E5309F1E3B82FC000898A6 /* Modbus2 */ = {
+			isa = PBXGroup;
+			children = (
+				A2E530A01E3B830E000898A6 /* pdu.swift */,
+			);
+			name = Modbus2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +174,7 @@
 				TargetAttributes = {
 					A223D9A81E3003C60003669B = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -184,8 +204,8 @@
 			files = (
 				A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */,
 				A223D9B41E3003C60003669B /* Assets.xcassets in Resources */,
-				A223D9DA1E300DF90003669B /* Info-tvOS.plist in Resources */,
-				A223D9DB1E300DF90003669B /* Info.plist in Resources */,
+				A2AC21BF1E3B6DA200A59667 /* Info-tvOS.plist in Resources */,
+				A2AC21C01E3B6DA200A59667 /* Info.plist in Resources */,
 				A223D9B21E3003C60003669B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,19 +217,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A223D9E11E300DF90003669B /* yudpsocket.c in Sources */,
 				A22335B61E37FCC8007298E1 /* modbusMbap.swift in Sources */,
-				A223D9DF1E300DF90003669B /* UDPClient.swift in Sources */,
+				A2AC21B21E3B68D800A59667 /* interfaces.swift in Sources */,
 				A22335B81E37FCC8007298E1 /* utilities.swift in Sources */,
 				A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */,
-				A223D9DD1E300DF90003669B /* Socket.swift in Sources */,
 				A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */,
-				A223D9DE1E300DF90003669B /* TCPClient.swift in Sources */,
-				A223D9DC1E300DF90003669B /* Result.swift in Sources */,
+				A2AC21B41E3B6C0300A59667 /* constants.swift in Sources */,
+				A2AC21C51E3B6DA200A59667 /* ytcpsocket.c in Sources */,
+				A2AC21C21E3B6DA200A59667 /* Socket.swift in Sources */,
+				A2AC21C11E3B6DA200A59667 /* Result.swift in Sources */,
+				A2AC21C31E3B6DA200A59667 /* TCPClient.swift in Sources */,
 				A223D9AF1E3003C60003669B /* ViewController.swift in Sources */,
+				A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */,
 				A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */,
+				A2E530A11E3B830E000898A6 /* pdu.swift in Sources */,
 				A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */,
-				A223D9E01E300DF90003669B /* ytcpsocket.c in Sources */,
+				A2AC21C41E3B6DA200A59667 /* UDPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,10 +355,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = teslaCharger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindscape.teslaCharger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "teslaCharger/Modbus/teslaCharger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -344,10 +370,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = teslaCharger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindscape.teslaCharger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "teslaCharger/Modbus/teslaCharger-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

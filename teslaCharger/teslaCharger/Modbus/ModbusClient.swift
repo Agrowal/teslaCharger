@@ -10,6 +10,9 @@ import Foundation
 
 class ModbusClient: Utilities {
     
+    var ModbusStatus1 = ModbusStatus.shared
+    
+    
     let _MBAP = ModbusMbap()
     let _PDU = ModbusPdu()
     
@@ -62,8 +65,8 @@ class ModbusClient: Utilities {
             let quantityAsByteArray = toByteArray(UInt16(quantityToRead), byteOrder: .BigEndian)
             
              _PDU.setPDU(functionCode: functionCode.rawValue, startingAddress: startingAddress, pduData: quantityAsByteArray)
-            prepareRequest()
-            sendPreparedRequest()
+            
+            sendPreparedRequest(request: preparedRequest())
             return
         }
         else{
