@@ -65,7 +65,7 @@ class ModbusClient: Utilities {
             let quantityAsByteArray = toByteArray(UInt16(quantityToRead), byteOrder: .BigEndian)
             
              _PDU.setPDU(functionCode: functionCode.rawValue, startingAddress: startingAddress, pduData: quantityAsByteArray)
-            
+
             sendPreparedRequest(request: preparedRequest())
             return
         }

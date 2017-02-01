@@ -102,6 +102,7 @@ class ModbusPDU {
 
         :param buffer: A buffer containing the data that have been received.
         :returns: The number of bytes in the PDU.
+         
  
         if hasattr(cls, '_rtu_frame_size'){
             return cls._rtu_frame_size
@@ -126,14 +127,15 @@ class ModbusRequest: ModbusPDU {
         //ModbusPDU(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
     }
 
-    func doException(self, exception){
+    func doException(exception: String){
         /* Builds an error response based on the function
 
         :param exception: The exception to return
         :raises: An exception response
         */
-        _logger.error("Exception Response F\(self.function_code) E\(exception)")
-        return ExceptionResponse(self.function_code, exception)
+        //_logger.error("Exception Response F\(self.function_code) E\(exception)")
+        //return ExceptionResponse(self.function_code, exception)
+        print(exception)
     }
 }
 

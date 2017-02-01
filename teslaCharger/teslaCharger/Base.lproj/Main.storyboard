@@ -28,47 +28,44 @@
                                 <rect key="frame" x="20" y="14" width="335" height="627"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-sR-iav">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teslaName" translatesAutoresizingMaskIntoConstraints="NO" id="SHB-67-Vd8">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="75"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="oMM-OK-qF6"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="NDb-c6-VQb"/>
+                                        </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfv-kV-jAh">
-                                        <rect key="frame" x="0.0" y="90" width="335" height="150"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="721" translatesAutoresizingMaskIntoConstraints="NO" id="wfv-kV-jAh">
+                                        <rect key="frame" x="0.0" y="115" width="335" height="100"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teslaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-6C-KzK">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="HiE-DA-QWJ"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="ziO-NU-1Cs"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvy-1S-aBq">
-                                        <rect key="frame" x="0.0" y="255" width="335" height="282"/>
+                                        <rect key="frame" x="0.0" y="230" width="335" height="220"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charger status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N9y-0A-GGm">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="282"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="269" image="tesla-cutout" translatesAutoresizingMaskIntoConstraints="NO" id="Qel-LG-Rlf">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
+                                            </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="220" id="WWQ-T5-wB5"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YWW-ce-dMp">
-                                        <rect key="frame" x="0.0" y="552" width="335" height="75"/>
+                                        <rect key="frame" x="0.0" y="465" width="335" height="162"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzs-W7-Pp2">
-                                                <rect key="frame" x="0.0" y="0.0" width="155" height="75"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="155" height="162"/>
                                                 <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="sHX-Hr-yOe"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <state key="normal" title="Turn ON">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,11 +80,8 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPd-pq-C0g">
-                                                <rect key="frame" x="180" y="0.0" width="155" height="75"/>
+                                                <rect key="frame" x="180" y="0.0" width="155" height="162"/>
                                                 <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="izX-JN-780"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <state key="normal" title="Turn OFF">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,9 +112,6 @@
                             <constraint firstAttribute="trailing" secondItem="3er-pC-Tea" secondAttribute="trailing" id="dgB-ND-D43"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="chargerStatusLabel" destination="N9y-0A-GGm" id="b4M-WO-5n8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,6 +120,7 @@
     </scenes>
     <resources>
         <image name="bg2" width="2560" height="1600"/>
+        <image name="tesla-cutout" width="640" height="312"/>
         <image name="teslaLogo" width="512" height="512"/>
         <image name="teslaName" width="2000" height="261"/>
     </resources>
