@@ -27,10 +27,12 @@ class WriteSingleCoilRequest: ModbusRequest {
     will not affect the coil.
     */
     let function_code = 5
-    let _rtu_frame_size = 8
+    let _rtu_frame_size = 6
     
     var address :Int
     var value :Bool
+    
+    var byteArray :[UInt8] = []
 
     init (address: Int = 0, value: Bool = false, transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool) {
         /* Initializes a new instance
@@ -57,6 +59,28 @@ class WriteSingleCoilRequest: ModbusRequest {
         
         return result
          */
+        var modbusValue :[UInt8] = []
+        if self.value {
+            modbusValue = [255,0]
+        }
+        else {
+            modbusValue = [0,0]
+        }
+        
+        let toBytes = Utilities()
+        
+        byteArray.removeAll()
+        //MBAP
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(transaction_id), byteOrder: .BigEndian))
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(protocol_id), byteOrder: .BigEndian))
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(_rtu_frame_size), byteOrder: .BigEndian))
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt8(unit_id), byteOrder: .BigEndian))
+        //PDU
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt8(function_code), byteOrder: .BigEndian))
+        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(address), byteOrder: .BigEndian))
+        byteArray.append(contentsOf: modbusValue)
+        
+        
     }
 
     override func decode(data: Data) {
@@ -86,9 +110,11 @@ class WriteSingleCoilRequest: ModbusRequest {
         values = context.getValues(self.function_code, self.address, 1)
         return WriteSingleCoilResponse(self.address, values[0])
          */
-        let dataa :Data = Data(bytes: [12,3,3])
         
-        switch client.send(string: "HELLOO") {
+        encode()
+        //let dataa :Data = Data(bytes: byteArray)
+        
+        switch client.send(data: byteArray) {
         case .success:
             guard let data = client.read(1024*10, timeout: 5) else { break}
             print(data)

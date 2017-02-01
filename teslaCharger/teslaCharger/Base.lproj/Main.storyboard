@@ -21,95 +21,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="3er-pC-Tea">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="app bg" translatesAutoresizingMaskIntoConstraints="NO" id="3er-pC-Tea">
+                                <rect key="frame" x="-2" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3aO-rq-J8h">
-                                <rect key="frame" x="20" y="14" width="335" height="627"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Charging" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVE-2F-fHQ">
+                                <rect key="frame" x="139" y="28" width="97" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="charge" translatesAutoresizingMaskIntoConstraints="NO" id="fjb-xI-ZQS">
+                                <rect key="frame" x="67" y="97" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="128" id="0QQ-X4-s7e"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="kGc-s4-3LK"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bz-Ig-p2j">
+                                <rect key="frame" x="134" y="257" width="106" height="30"/>
+                                <state key="normal" title="Charger On/Off">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onOffButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KDt-Jy-xfg"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="tesla-cutout" translatesAutoresizingMaskIntoConstraints="NO" id="p6v-RU-ol5">
+                                <rect key="frame" x="2" y="355" width="371" height="181"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="181" id="74f-Bk-eCz"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ypC-qc-hMF">
+                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-sR-iav">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teslaName" translatesAutoresizingMaskIntoConstraints="NO" id="SHB-67-Vd8">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="NDb-c6-VQb"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="721" translatesAutoresizingMaskIntoConstraints="NO" id="wfv-kV-jAh">
-                                        <rect key="frame" x="0.0" y="115" width="335" height="100"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teslaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-6C-KzK">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="ziO-NU-1Cs"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvy-1S-aBq">
-                                        <rect key="frame" x="0.0" y="230" width="335" height="220"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="269" image="tesla-cutout" translatesAutoresizingMaskIntoConstraints="NO" id="Qel-LG-Rlf">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="220" id="WWQ-T5-wB5"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YWW-ce-dMp">
-                                        <rect key="frame" x="0.0" y="465" width="335" height="162"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzs-W7-Pp2">
-                                                <rect key="frame" x="0.0" y="0.0" width="155" height="162"/>
-                                                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <state key="normal" title="Turn ON">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="onButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ANS-Nr-Puc"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPd-pq-C0g">
-                                                <rect key="frame" x="180" y="0.0" width="155" height="162"/>
-                                                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <state key="normal" title="Turn OFF">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="offButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hu1-3E-DhX"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="GXa-nb-2rM">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="58"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="8D5-4y-T6e">
+                                        <rect key="frame" x="75" y="0.0" width="75" height="58"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="ntV-Ct-5Dl">
+                                        <rect key="frame" x="150" y="0.0" width="75" height="58"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="sHW-yc-Co5">
+                                        <rect key="frame" x="225" y="0.0" width="75" height="58"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-9R-RBi">
+                                        <rect key="frame" x="300" y="0.0" width="75" height="58"/>
+                                    </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="nb3-Gx-Vq1"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="3aO-rq-J8h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="2uR-xs-hC9"/>
-                            <constraint firstItem="3er-pC-Tea" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3jP-nh-JAL"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3er-pC-Tea" secondAttribute="bottom" id="CL3-dR-QRG"/>
-                            <constraint firstItem="3er-pC-Tea" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JHo-Vz-XZR"/>
-                            <constraint firstItem="3aO-rq-J8h" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="Mzh-Yi-EhK"/>
-                            <constraint firstAttribute="bottom" secondItem="3aO-rq-J8h" secondAttribute="bottom" constant="20" id="QLc-UI-m6i"/>
-                            <constraint firstAttribute="trailing" secondItem="3aO-rq-J8h" secondAttribute="trailing" constant="20" id="cue-Ji-oPc"/>
-                            <constraint firstAttribute="trailing" secondItem="3er-pC-Tea" secondAttribute="trailing" id="dgB-ND-D43"/>
+                            <constraint firstItem="3er-pC-Tea" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9T7-5S-gKS"/>
+                            <constraint firstItem="7bz-Ig-p2j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9jQ-fS-Isf"/>
+                            <constraint firstAttribute="trailing" secondItem="ypC-qc-hMF" secondAttribute="trailing" id="A0z-ay-fG1"/>
+                            <constraint firstItem="aVE-2F-fHQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ASM-Dp-kse"/>
+                            <constraint firstItem="aVE-2F-fHQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="BRQ-fh-aPQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3er-pC-Tea" secondAttribute="bottom" id="JxJ-SA-clw"/>
+                            <constraint firstItem="3er-pC-Tea" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Pdx-Ap-hjz"/>
+                            <constraint firstAttribute="trailing" secondItem="p6v-RU-ol5" secondAttribute="trailing" id="QzK-Fb-GKn"/>
+                            <constraint firstItem="p6v-RU-ol5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RGd-RG-ji8"/>
+                            <constraint firstItem="7bz-Ig-p2j" firstAttribute="top" secondItem="fjb-xI-ZQS" secondAttribute="bottom" constant="35" id="Vxa-Md-gVo"/>
+                            <constraint firstItem="fjb-xI-ZQS" firstAttribute="top" secondItem="aVE-2F-fHQ" secondAttribute="bottom" constant="40" id="Yq1-om-XMF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ypC-qc-hMF" secondAttribute="bottom" id="Zyi-YW-Hg0"/>
+                            <constraint firstItem="ypC-qc-hMF" firstAttribute="top" secondItem="p6v-RU-ol5" secondAttribute="bottom" constant="75" id="hit-eY-5hV"/>
+                            <constraint firstItem="ypC-qc-hMF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rTl-ip-lZL"/>
+                            <constraint firstItem="fjb-xI-ZQS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tXE-dL-wBQ"/>
+                            <constraint firstAttribute="trailing" secondItem="3er-pC-Tea" secondAttribute="trailing" id="whO-6i-Y5A"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -119,9 +103,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg2" width="2560" height="1600"/>
+        <image name="1" width="128" height="99"/>
+        <image name="2" width="128" height="99"/>
+        <image name="3" width="128" height="99"/>
+        <image name="4" width="128" height="99"/>
+        <image name="5" width="128" height="99"/>
+        <image name="app bg" width="640" height="1136"/>
+        <image name="charge" width="512" height="512"/>
         <image name="tesla-cutout" width="640" height="312"/>
-        <image name="teslaLogo" width="512" height="512"/>
-        <image name="teslaName" width="2000" height="261"/>
     </resources>
 </document>
