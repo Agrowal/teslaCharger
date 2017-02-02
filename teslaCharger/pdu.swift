@@ -12,13 +12,11 @@ import Foundation
 
 Contains base classes for modbus request/response/error packets
 
-
-from pymodbus.exceptions import NotImplementedException
 from pymodbus.utilities import rtuFrameSize
 
-#---------------------------------------------------------------------------#
-# Logging
-#---------------------------------------------------------------------------#
+//---------------------------------------------------------------------------#
+// Logging
+//---------------------------------------------------------------------------#
 import logging
 _logger = logging.getLogger(__name__)
 */
@@ -76,25 +74,23 @@ class ModbusPDU {
         self.check = 0x0000
     }
     
-    func encode(){
+    func encode() throws {
         /* Encodes the message
         
         :raises: A not implemented exception
         */
-        
-        print("not implemented")
-        //raise NotImplementedException()
+    
+        throw NotImplementedException()
     }
         
-    func decode(data: Data){
+    func decode(data: Data) throws {
         /* Decodes data part of the message.
         
         :param data: is a string object
         :raises: A not implemented exception
         */
         
-        print("not implemented")
-        //raise NotImplementedException()
+        throw NotImplementedException()
     }
 
     static func calculateRtuFrameSize(buffer: Data){
@@ -124,7 +120,6 @@ class ModbusRequest: ModbusPDU {
         // Proxy to the lower level initializer //
         
         super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
-        //ModbusPDU(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
     }
 
     func doException(exception: String){
@@ -133,6 +128,7 @@ class ModbusRequest: ModbusPDU {
         :param exception: The exception to return
         :raises: An exception response
         */
+        
         //_logger.error("Exception Response F\(self.function_code) E\(exception)")
         //return ExceptionResponse(self.function_code, exception)
         print(exception)
@@ -159,7 +155,6 @@ class ModbusResponse: ModbusPDU {
         // Proxy to the lower level initializer //
         
         super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
-        //ModbusPDU(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
     }
 }
 /*
