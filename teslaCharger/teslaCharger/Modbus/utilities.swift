@@ -35,6 +35,11 @@ class Utilities{
         let valueByteArray = withUnsafeBytes(of: &value) { Array($0)}
         return (byteOrder == .LittleEndian) ? valueByteArray : valueByteArray.reversed()
     }
+    
+    static func fromByteArray<T>(_ value: [UInt8], _: T.Type, byteOrder: ByteOrder) -> T {
+        let bytes = (byteOrder == .LittleEndian) ? value : value.reversed()
+        return bytes.withUnsafeBytes {$0.baseAddress!.load(as: T.self)}
+    }
 }
 
 class ByteArray {
@@ -43,16 +48,31 @@ class ByteArray {
     init(){
     }
     
-    func append<T>(_ value: T, byteCount: Int ) {
-        if byteCount == 1 {
-            //bytes
+    enum ByteCount {
+        case One
+        case Two
+    }
+    
+    func append (value: Int, byteCount: ByteCount ) {
+        if byteCount == .One {
+            let convertedValue = Utilities.toByteArray(UInt8(value), byteOrder: .BigEndian)
+            bytes.append(contentsOf: convertedValue)
         }
-        else if byteCount == 2{
-            
+        else if byteCount == .Two {
+            let convertedValue = Utilities.toByteArray(UInt16(value), byteOrder: .BigEndian)
+            bytes.append(contentsOf: convertedValue)
         }
         else{
             print("ERROR")
         }
+    }
+    
+    func append(value: [UInt8]) {
+        bytes.append(contentsOf: value)
+    }
+    
+    func removeAll() {
+        bytes.removeAll()
     }
     
     

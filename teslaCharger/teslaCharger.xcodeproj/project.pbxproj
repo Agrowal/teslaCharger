@@ -36,7 +36,7 @@
 		A22335B01E37FCC7007298E1 /* ModbusClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModbusClient.swift; sourceTree = "<group>"; };
 		A22335B11E37FCC7007298E1 /* modbusMbap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusMbap.swift; sourceTree = "<group>"; };
 		A22335B21E37FCC7007298E1 /* modbusPdu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusPdu.swift; sourceTree = "<group>"; };
-		A22335B31E37FCC8007298E1 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
+		A22335B31E37FCC8007298E1 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = teslaCharger/Modbus/utilities.swift; sourceTree = "<group>"; };
 		A223D9A91E3003C60003669B /* teslaCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teslaCharger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223D9AC1E3003C60003669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A223D9AE1E3003C60003669B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +78,6 @@
 				A22335B01E37FCC7007298E1 /* ModbusClient.swift */,
 				A22335B11E37FCC7007298E1 /* modbusMbap.swift */,
 				A22335B21E37FCC7007298E1 /* modbusPdu.swift */,
-				A22335B31E37FCC8007298E1 /* utilities.swift */,
 			);
 			name = Modbus;
 			path = teslaCharger/Modbus;
@@ -141,6 +140,7 @@
 				A2544F761E3C0CC100E64A79 /* bit_write_message.swift */,
 				A26EDE941E43261300A3C87D /* exceptions.swift */,
 				A26EDE961E432CEA00A3C87D /* constants.swift */,
+				A22335B31E37FCC8007298E1 /* utilities.swift */,
 			);
 			name = Modbus2;
 			sourceTree = "<group>";

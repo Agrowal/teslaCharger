@@ -32,7 +32,7 @@ class WriteSingleCoilRequest: ModbusRequest {
     var address :Int
     var value :Bool
     
-    var byteArray :[UInt8] = []
+    var byteArray = ByteArray()
 
     init (address: Int = 0, value: Bool = false, transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool) {
         /* Initializes a new instance
@@ -52,37 +52,29 @@ class WriteSingleCoilRequest: ModbusRequest {
         :returns: The byte encoded message
         */
         
-        /* !!!!!TO DO!!!!!!      !!!!!TO DO!!!!!!      !!!!!TO DO!!!!!!
-        var result  = struct.pack('>H', self.address)
-        if self.value { result += _turn_coil_on }
-        else { result += _turn_coil_off }
-        
-        return result
-         */
-        
-        var modbusValue :[UInt8] = []
-
-        let toBytes = Utilities()
+       
+        let modbusValue = ByteArray()
         
         if self.value {
-            modbusValue = toBytes.toByteArray(UInt16(ModbusStatus.shared.Off), byteOrder: .BigEndian)
+            modbusValue.append(value: ModbusStatus.shared.On, byteCount: .Two)
         }
         else {
-            modbusValue = toBytes.toByteArray(UInt16(ModbusStatus.shared.On), byteOrder: .BigEndian)
+            modbusValue.append(value: ModbusStatus.shared.Off, byteCount: .Two)
         }
 
         
         byteArray.removeAll()
-        //MBAP
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(transaction_id), byteOrder: .BigEndian))
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(protocol_id), byteOrder: .BigEndian))
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(_rtu_frame_size), byteOrder: .BigEndian))
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt8(unit_id), byteOrder: .BigEndian))
-        //PDU
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt8(function_code), byteOrder: .BigEndian))
-        byteArray.append(contentsOf: toBytes.toByteArray(UInt16(address), byteOrder: .BigEndian))
-        byteArray.append(contentsOf: modbusValue)
         
+        //MBAP
+        byteArray.append(value: transaction_id, byteCount: .Two)
+        byteArray.append(value: protocol_id,    byteCount: .Two)
+        byteArray.append(value: _rtu_frame_size,byteCount: .Two)
+        byteArray.append(value: unit_id,        byteCount: .One)
+
+        //PDU
+        byteArray.append(value: function_code,  byteCount: .One)
+        byteArray.append(value: address,        byteCount: .Two)
+        byteArray.append(value: modbusValue.bytes)
         
     }
 
@@ -91,9 +83,12 @@ class WriteSingleCoilRequest: ModbusRequest {
 
         :param data: The packet data to decode
         */
-        self.address = 0 // !!!!!TO DO!!!!!!      !!!!!TO DO!!!!!!      !!!!!TO DO!!!!!!
-        let value = 0xFF00 //struct.unpack('>HH', data)
-        self.value = (value == 0xFF00) // ModbusStatus.On)
+        
+        let codedValue = Array(byteArray.bytes.dropLast(2))
+        let codedAddress = Array(byteArray.bytes.dropLast(2))
+        
+        //Utilities.fromByteArray(codedValue, UInt16, byteOrder: .LittleEndian)
+        
     }
 
     func execute(client: TCPClient) {
@@ -102,6 +97,7 @@ class WriteSingleCoilRequest: ModbusRequest {
         :param context: The datastore to request from
         :returns: The populated response or exception message
         */
+        
         //if self.value not in [ModbusStatus.Off, ModbusStatus.On]:
             //    return self.doException(merror.IllegalValue)
         
@@ -117,10 +113,9 @@ class WriteSingleCoilRequest: ModbusRequest {
         encode()
         //let dataa :Data = Data(bytes: byteArray)
         
-        switch client.send(data: byteArray) {
+        switch client.send(data: byteArray.bytes) {
         case .success:
             guard let data = client.read(1024*10, timeout: 5) else { break}
-            print(data)
         case .failure(let error):
             print(error)
         }
@@ -133,5 +128,61 @@ class WriteSingleCoilRequest: ModbusRequest {
         :return: A string representation of the instance
         */
         return "WriteCoilRequest(\(self.address),\(self.value)) => "
+    }
+}
+
+class WriteSingleCoilResponse :ModbusResponse {
+    /*
+    The normal response is an echo of the request, returned after the coil
+    state has been written.
+    */
+    let function_code = 5
+    let _rtu_frame_size = 8
+    
+    var address :Int
+    var value :Bool
+
+    init (address: Int = 0, value: Bool = false, transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool) {
+        /* Initializes a new instance
+
+        :param address: The variable address written to
+        :param value: The value written at address
+        */
+        self.address = address
+        self.value = value
+        
+        super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
+        
+
+    }
+    
+    override func encode() {
+        /* Encodes write coil response
+
+        :return: The byte encoded message
+        */
+        
+        //result  = struct.pack('>H', self.address)
+        //if self.value: result += _turn_coil_on
+        //else: result += _turn_coil_off
+        //return result
+    }
+    
+    override func decode(data: Data) {
+        /* Decodes a write coil response
+
+        :param data: The packet data to decode
+        */
+        
+        //self.address, value = struct.unpack('>HH', data)
+        //self.value = (value == ModbusStatus.On)
+    }
+    
+    func __str__() -> String {
+        /* Returns a string representation of the instance
+
+        :returns: A string representation of the instance
+        */
+        return "WriteCoilResponse \(self.address) => \(self.value)"
     }
 }
