@@ -19,7 +19,7 @@
 		A223D9B71E3003C60003669B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A223D9B51E3003C60003669B /* LaunchScreen.storyboard */; };
 		A2544F771E3C0CC100E64A79 /* bit_write_message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2544F761E3C0CC100E64A79 /* bit_write_message.swift */; };
 		A26EDE951E43261300A3C87D /* exceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26EDE941E43261300A3C87D /* exceptions.swift */; };
-		A2AC21B41E3B6C0300A59667 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B31E3B6C0300A59667 /* constants.swift */; };
+		A26EDE971E432CEA00A3C87D /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26EDE961E432CEA00A3C87D /* constants.swift */; };
 		A2AC21BF1E3B6DA200A59667 /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2AC21B61E3B6DA200A59667 /* Info-tvOS.plist */; };
 		A2AC21C01E3B6DA200A59667 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2AC21B71E3B6DA200A59667 /* Info.plist */; };
 		A2AC21C11E3B6DA200A59667 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21B81E3B6DA200A59667 /* Result.swift */; };
@@ -46,7 +46,7 @@
 		A223D9B81E3003C60003669B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2544F761E3C0CC100E64A79 /* bit_write_message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bit_write_message.swift; sourceTree = "<group>"; };
 		A26EDE941E43261300A3C87D /* exceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = exceptions.swift; sourceTree = "<group>"; };
-		A2AC21B31E3B6C0300A59667 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		A26EDE961E432CEA00A3C87D /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		A2AC21B51E3B6DA100A59667 /* teslaCharger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "teslaCharger-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2AC21B61E3B6DA200A59667 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-tvOS.plist"; path = "teslaCharger/SwiftSocket/Info-tvOS.plist"; sourceTree = SOURCE_ROOT; };
 		A2AC21B71E3B6DA200A59667 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = teslaCharger/SwiftSocket/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -74,7 +74,6 @@
 		A22335AE1E37FCC7007298E1 /* Modbus */ = {
 			isa = PBXGroup;
 			children = (
-				A2AC21B31E3B6C0300A59667 /* constants.swift */,
 				A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */,
 				A22335B01E37FCC7007298E1 /* ModbusClient.swift */,
 				A22335B11E37FCC7007298E1 /* modbusMbap.swift */,
@@ -141,6 +140,7 @@
 				A2E530A01E3B830E000898A6 /* pdu.swift */,
 				A2544F761E3C0CC100E64A79 /* bit_write_message.swift */,
 				A26EDE941E43261300A3C87D /* exceptions.swift */,
+				A26EDE961E432CEA00A3C87D /* constants.swift */,
 			);
 			name = Modbus2;
 			sourceTree = "<group>";
@@ -225,12 +225,12 @@
 				A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */,
 				A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */,
 				A26EDE951E43261300A3C87D /* exceptions.swift in Sources */,
-				A2AC21B41E3B6C0300A59667 /* constants.swift in Sources */,
 				A2AC21C51E3B6DA200A59667 /* ytcpsocket.c in Sources */,
 				A2AC21C21E3B6DA200A59667 /* Socket.swift in Sources */,
 				A2AC21C11E3B6DA200A59667 /* Result.swift in Sources */,
 				A2AC21C31E3B6DA200A59667 /* TCPClient.swift in Sources */,
 				A223D9AF1E3003C60003669B /* ViewController.swift in Sources */,
+				A26EDE971E432CEA00A3C87D /* constants.swift in Sources */,
 				A2544F771E3C0CC100E64A79 /* bit_write_message.swift in Sources */,
 				A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */,
 				A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */,

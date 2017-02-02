@@ -114,8 +114,8 @@ class ConnectionException: ModbusException {
 //---------------------------------------------------------------------------#
 // Exported symbols
 //---------------------------------------------------------------------------#
-let __all__ = [
+/*var __all__ = [
 "ModbusException", "ModbusIOException",
 "ParameterException", "NotImplementedException",
 "ConnectionException", "NoSuchSlaveException",
-]
+]*/

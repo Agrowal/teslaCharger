@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     //let modbusTeslaCharger = fasadaModbus()
-    let client = TCPClient(address: "192.168.8.3", port: 1502)
+    let client = TCPClient(address: "127.0.0.1", port: 1502)
     var chargerStatus = "ON"
     
     @IBAction func onOffButtonPressed(_ sender: Any) {

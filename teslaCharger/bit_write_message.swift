@@ -59,15 +59,18 @@ class WriteSingleCoilRequest: ModbusRequest {
         
         return result
          */
+        
         var modbusValue :[UInt8] = []
+
+        let toBytes = Utilities()
+        
         if self.value {
-            modbusValue = [255,0]
+            modbusValue = toBytes.toByteArray(UInt16(ModbusStatus.shared.Off), byteOrder: .BigEndian)
         }
         else {
-            modbusValue = [0,0]
+            modbusValue = toBytes.toByteArray(UInt16(ModbusStatus.shared.On), byteOrder: .BigEndian)
         }
-        
-        let toBytes = Utilities()
+
         
         byteArray.removeAll()
         //MBAP
