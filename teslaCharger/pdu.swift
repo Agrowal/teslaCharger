@@ -8,18 +8,8 @@
 
 import Foundation
 
-/*
+//Contains base classes for modbus request/response/error packets
 
-Contains base classes for modbus request/response/error packets
-
-from pymodbus.utilities import rtuFrameSize
-
-//---------------------------------------------------------------------------#
-// Logging
-//---------------------------------------------------------------------------#
-import logging
-_logger = logging.getLogger(__name__)
-*/
 
 //---------------------------------------------------------------------------//
 //Base PDU's
@@ -50,27 +40,18 @@ class ModbusPDU {
     
     This is used for LRC/CRC in the serial modbus protocols
     
-    .. attribute:: skip_encode
-    
-    This is used when the message payload has already been encoded.
-    Generally this will occur when the PayloadBuilder is being used
-    to create a complicated message. By setting this to True, the
-    request will pass the currently encoded message through instead
-    of encoding it again.
     */
     
-    let transaction_id  :Int
-    let protocol_id     :Int
-    let unit_id         :Int
-    let skip_encode     :Bool
+    var transaction_id  :Int
+    var protocol_id     :Int
+    var unit_id         :Int
     let check           :UInt16
     
-    init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
+    init(transaction_id: Int = 1, protocol_id: Int = 0, unit_id: Int){
         // Initializes the base data for a modbus request //
         self.transaction_id = transaction_id
         self.protocol_id = protocol_id
         self.unit_id = unit_id
-        self.skip_encode = skip_encode
         self.check = 0x0000
     }
     
@@ -116,11 +97,11 @@ class ModbusPDU {
 class ModbusRequest: ModbusPDU {
     // Base class for a modbus request PDU //
 
-    override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
+    /*override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
         // Proxy to the lower level initializer //
         
-        super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
-    }
+        super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id)
+    }*/
 
     func doException(exception: String){
         /* Builds an error response based on the function
@@ -151,11 +132,11 @@ class ModbusResponse: ModbusPDU {
 
     let should_respond = true
 
-    override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
+   /* override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
         // Proxy to the lower level initializer //
         
         super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
-    }
+    }*/
 }
 /*
 //---------------------------------------------------------------------------#

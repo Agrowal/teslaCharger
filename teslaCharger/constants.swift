@@ -15,7 +15,6 @@ Constants For Modbus Server/Client
     This is the single location for storing default
 values for the servers and clients.
 */
-//from pymodbus.interfaces import Singleton
 
 
 class Defaults {
@@ -99,6 +98,9 @@ class Defaults {
     serial server emulater where a request to a non-existant slave on a bus
     will never respond. The client in this case will simply timeout.
     */
+    
+    static let shared = Defaults()
+    private init() {}
     
     let Port                = 502
     let Retries             = 3

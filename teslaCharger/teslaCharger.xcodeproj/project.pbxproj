@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */; };
-		A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B01E37FCC7007298E1 /* ModbusClient.swift */; };
-		A22335B61E37FCC8007298E1 /* modbusMbap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B11E37FCC7007298E1 /* modbusMbap.swift */; };
-		A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B21E37FCC7007298E1 /* modbusPdu.swift */; };
 		A22335B81E37FCC8007298E1 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B31E37FCC8007298E1 /* utilities.swift */; };
 		A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AC1E3003C60003669B /* AppDelegate.swift */; };
 		A223D9AF1E3003C60003669B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AE1E3003C60003669B /* ViewController.swift */; };
@@ -33,10 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fasadaModbus.swift; sourceTree = "<group>"; };
-		A22335B01E37FCC7007298E1 /* ModbusClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModbusClient.swift; sourceTree = "<group>"; };
-		A22335B11E37FCC7007298E1 /* modbusMbap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusMbap.swift; sourceTree = "<group>"; };
-		A22335B21E37FCC7007298E1 /* modbusPdu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modbusPdu.swift; sourceTree = "<group>"; };
 		A22335B31E37FCC8007298E1 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = teslaCharger/Modbus/utilities.swift; sourceTree = "<group>"; };
 		A223D9A91E3003C60003669B /* teslaCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teslaCharger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223D9AC1E3003C60003669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,18 +65,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A22335AE1E37FCC7007298E1 /* Modbus */ = {
-			isa = PBXGroup;
-			children = (
-				A22335AF1E37FCC7007298E1 /* fasadaModbus.swift */,
-				A22335B01E37FCC7007298E1 /* ModbusClient.swift */,
-				A22335B11E37FCC7007298E1 /* modbusMbap.swift */,
-				A22335B21E37FCC7007298E1 /* modbusPdu.swift */,
-			);
-			name = Modbus;
-			path = teslaCharger/Modbus;
-			sourceTree = "<group>";
-		};
 		A223D9A01E3003C60003669B = {
 			isa = PBXGroup;
 			children = (
@@ -92,7 +72,6 @@
 				A223D9D01E300DF90003669B /* SwiftSocket */,
 				A223D9AB1E3003C60003669B /* teslaCharger */,
 				A223D9AA1E3003C60003669B /* Products */,
-				A22335AE1E37FCC7007298E1 /* Modbus */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,10 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22335B61E37FCC8007298E1 /* modbusMbap.swift in Sources */,
 				A22335B81E37FCC8007298E1 /* utilities.swift in Sources */,
-				A22335B51E37FCC8007298E1 /* ModbusClient.swift in Sources */,
-				A22335B71E37FCC8007298E1 /* modbusPdu.swift in Sources */,
 				A26EDE951E43261300A3C87D /* exceptions.swift in Sources */,
 				A2AC21C51E3B6DA200A59667 /* ytcpsocket.c in Sources */,
 				A2AC21C21E3B6DA200A59667 /* Socket.swift in Sources */,
@@ -237,7 +213,6 @@
 				A2DAE9EC1E437E560086F8BC /* interfaceModbus.swift in Sources */,
 				A2544F771E3C0CC100E64A79 /* bit_write_message.swift in Sources */,
 				A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */,
-				A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */,
 				A2E530A11E3B830E000898A6 /* pdu.swift in Sources */,
 				A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */,
 				A2AC21C41E3B6DA200A59667 /* UDPClient.swift in Sources */,

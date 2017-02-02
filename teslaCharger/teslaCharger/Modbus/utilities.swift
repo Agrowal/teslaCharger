@@ -18,18 +18,6 @@ class Utilities{
         case LittleEndian
     }
     
-    func toByteArray<T>(_ value: T, byteOrder: ByteOrder) -> [UInt8] {
-        var value = value
-        let valueByteArray = withUnsafeBytes(of: &value) { Array($0)}
-        return (byteOrder == .LittleEndian) ? valueByteArray : valueByteArray.reversed()
-    }
-    
-    func fromByteArray<T>(_ value: [UInt8], _: T.Type, byteOrder: ByteOrder) -> T {
-        let bytes = (byteOrder == .LittleEndian) ? value : value.reversed()
-        return bytes.withUnsafeBytes {$0.baseAddress!.load(as: T.self)}
-    }
-    
-    
     static func toByteArray<T>(_ value: T, byteOrder: ByteOrder) -> [UInt8] {
         var value = value
         let valueByteArray = withUnsafeBytes(of: &value) { Array($0)}
@@ -40,6 +28,11 @@ class Utilities{
         let bytes = (byteOrder == .LittleEndian) ? value : value.reversed()
         return bytes.withUnsafeBytes {$0.baseAddress!.load(as: T.self)}
     }
+    
+ /*   static func toInt(array: [UInt8]) -> Int {
+        let array = array
+        let bigEndianValue = array.withUnsafeBufferPointer{$0.baseAddress!.withMemoryRebound(to: UInt, capacity: <#T##Int#>, <#T##body: (UnsafePointer<T>) throws -> Result##(UnsafePointer<T>) throws -> Result#>)}
+    }*/
 }
 
 class ByteArray {
@@ -73,6 +66,10 @@ class ByteArray {
     
     func removeAll() {
         bytes.removeAll()
+    }
+    
+    func getFrame() -> [UInt8] {
+        return bytes
     }
     
     

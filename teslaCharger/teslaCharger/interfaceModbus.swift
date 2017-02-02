@@ -20,8 +20,13 @@ class interfaceModbus {
     }
     
     func chargerToggle(BaterryStatus: UIImageView) {
-        let offAction = WriteSingleCoilRequest(address: 4, value: !chargerOn, transaction_id: 1, protocol_id: 0, unit_id: 1, skip_encode: false)
-        offAction.execute(client: client)
+        let offAction = WriteSingleCoilRequest(address: 400, value: !chargerOn, unit_id: 1)
+        do {
+            let response = try offAction.execute(client: client)
+            print(response.__str__())
+        } catch  {
+         print("error")
+        }
         
         chargerOn = !chargerOn
         
