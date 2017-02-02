@@ -28,6 +28,7 @@
 		A2AC21C41E3B6DA200A59667 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BC1E3B6DA200A59667 /* UDPClient.swift */; };
 		A2AC21C51E3B6DA200A59667 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BD1E3B6DA200A59667 /* ytcpsocket.c */; };
 		A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = A2AC21BE1E3B6DA200A59667 /* yudpsocket.c */; };
+		A2DAE9EC1E437E560086F8BC /* interfaceModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DAE9EB1E437E550086F8BC /* interfaceModbus.swift */; };
 		A2E530A11E3B830E000898A6 /* pdu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E530A01E3B830E000898A6 /* pdu.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		A2AC21BC1E3B6DA200A59667 /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDPClient.swift; path = teslaCharger/SwiftSocket/UDPClient.swift; sourceTree = SOURCE_ROOT; };
 		A2AC21BD1E3B6DA200A59667 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ytcpsocket.c; path = teslaCharger/SwiftSocket/ytcpsocket.c; sourceTree = SOURCE_ROOT; };
 		A2AC21BE1E3B6DA200A59667 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yudpsocket.c; path = teslaCharger/SwiftSocket/yudpsocket.c; sourceTree = SOURCE_ROOT; };
+		A2DAE9EB1E437E550086F8BC /* interfaceModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = interfaceModbus.swift; sourceTree = "<group>"; };
 		A2E530A01E3B830E000898A6 /* pdu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pdu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			children = (
 				A223D9AC1E3003C60003669B /* AppDelegate.swift */,
 				A223D9AE1E3003C60003669B /* ViewController.swift */,
+				A2DAE9EB1E437E550086F8BC /* interfaceModbus.swift */,
 				A223D9B01E3003C60003669B /* Main.storyboard */,
 				A223D9B31E3003C60003669B /* Assets.xcassets */,
 				A223D9B51E3003C60003669B /* LaunchScreen.storyboard */,
@@ -231,6 +234,7 @@
 				A2AC21C31E3B6DA200A59667 /* TCPClient.swift in Sources */,
 				A223D9AF1E3003C60003669B /* ViewController.swift in Sources */,
 				A26EDE971E432CEA00A3C87D /* constants.swift in Sources */,
+				A2DAE9EC1E437E560086F8BC /* interfaceModbus.swift in Sources */,
 				A2544F771E3C0CC100E64A79 /* bit_write_message.swift in Sources */,
 				A2AC21C61E3B6DA200A59667 /* yudpsocket.c in Sources */,
 				A22335B41E37FCC8007298E1 /* fasadaModbus.swift in Sources */,

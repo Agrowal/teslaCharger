@@ -62,6 +62,26 @@ open class TCPClient: Socket {
             }
         }
     }
+    
+    
+    /*
+     * setup connection
+     * listen to server response
+     */
+    open func establishConnection() {
+        switch self.connect(timeout: 1) {
+        case .success:
+            guard let data = self.read(1024*10, timeout: 1) else { return }
+            
+            if let serverResponse = String(bytes: data, encoding: .utf8) {
+                print(serverResponse)
+            }
+            
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
   
     /*
     * close socket

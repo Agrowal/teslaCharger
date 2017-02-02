@@ -30,7 +30,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="charge" translatesAutoresizingMaskIntoConstraints="NO" id="fjb-xI-ZQS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="noCharge" translatesAutoresizingMaskIntoConstraints="NO" id="fjb-xI-ZQS">
                                 <rect key="frame" x="67" y="97" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="128" id="0QQ-X4-s7e"/>
@@ -101,6 +101,9 @@
                             <constraint firstAttribute="trailing" secondItem="3er-pC-Tea" secondAttribute="trailing" id="whO-6i-Y5A"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="BatteryStatus" destination="fjb-xI-ZQS" id="T5W-pM-COZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,7 +117,7 @@
         <image name="4" width="128" height="99"/>
         <image name="5" width="128" height="99"/>
         <image name="app bg" width="640" height="1136"/>
-        <image name="charge" width="512" height="512"/>
+        <image name="noCharge" width="512" height="512"/>
         <image name="tesla-cutout" width="640" height="312"/>
     </resources>
 </document>
