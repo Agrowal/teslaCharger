@@ -90,8 +90,8 @@ class ModbusPDU {
         :param buffer: A buffer containing the data that have been received.
         :returns: The number of bytes in the PDU.
          */
-
-        return
+        let bufferLength = buffer.count
+        return frameSize = bufferLength - 6
     }
 }
 
