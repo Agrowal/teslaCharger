@@ -36,9 +36,10 @@ class Utilities{
 }
 
 class ByteArray {
-    var bytes :[UInt8] = []
+    var bytes :[UInt8]
     
-    init(){
+    init(data: [UInt8] = []){
+        self.bytes = data
     }
     
     enum ByteCount {
@@ -58,6 +59,22 @@ class ByteArray {
         else{
             print("ERROR")
         }
+    }
+    
+    func readBytes(begin: Int, end: Int) -> Int {
+        let arraySlice = Array(bytes[begin...end])
+        let byteCount = arraySlice.count
+        switch byteCount {
+        case 1:
+            // One byte
+            return Int(Utilities.fromByteArray(arraySlice, UInt8.self, byteOrder: .BigEndian))
+        case 2:
+            // Two bytes
+            return Int(Utilities.fromByteArray(arraySlice, UInt16.self, byteOrder: .BigEndian))
+        default:
+            return Int(Utilities.fromByteArray(arraySlice, UInt8.self, byteOrder: .BigEndian))
+        }
+        
     }
     
     func append(value: [UInt8]) {

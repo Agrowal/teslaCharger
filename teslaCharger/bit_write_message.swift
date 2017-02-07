@@ -32,7 +32,7 @@ class WriteSingleCoilRequest: ModbusRequest {
     var address :Int
     var value :Bool
     
-    var aduFrame = ByteArray()
+    var aduFramer = ByteArray()
 
     init (address: Int = 0, value: Bool = false, unit_id: Int) {
         /* Initializes a new instance
@@ -54,18 +54,18 @@ class WriteSingleCoilRequest: ModbusRequest {
        
         let modbusValue = (self.value) ? ModbusStatus.shared.On : ModbusStatus.shared.Off
         
-        aduFrame.removeAll()
+        aduFramer.removeAll()
         
         //MBAP
-        aduFrame.append(value: transaction_id, byteCount: .Two)
-        aduFrame.append(value: protocol_id,    byteCount: .Two)
-        aduFrame.append(value: _rtu_frame_size,byteCount: .Two)
-        aduFrame.append(value: unit_id,        byteCount: .One)
+        aduFramer.append(value: transaction_id, byteCount: .Two)
+        aduFramer.append(value: protocol_id,    byteCount: .Two)
+        aduFramer.append(value: _rtu_frame_size,byteCount: .Two)
+        aduFramer.append(value: unit_id,        byteCount: .One)
 
         //PDU
-        aduFrame.append(value: function_code,  byteCount: .One)
-        aduFrame.append(value: address,        byteCount: .Two)
-        aduFrame.append(value: modbusValue,    byteCount: .Two)
+        aduFramer.append(value: function_code,  byteCount: .One)
+        aduFramer.append(value: address,        byteCount: .Two)
+        aduFramer.append(value: modbusValue,    byteCount: .Two)
         
     }
 
@@ -87,7 +87,7 @@ class WriteSingleCoilRequest: ModbusRequest {
         
         encode()
         
-        switch client.send(data: byteArray.bytes) {
+        switch client.send(data: aduFramer.getFrame()) {
         case .success:
             guard let data = client.read(1024*10, timeout: 5) else { break}
             print(data)
@@ -152,11 +152,7 @@ class WriteSingleCoilResponse :ModbusResponse {
 
         :return: The byte encoded message
         */
-        
-        //result  = struct.pack('>H', self.address)
-        //if self.value: result += _turn_coil_on
-        //else: result += _turn_coil_off
-        //return result
+        print("NOT IMPLEMENTED!!!")
     }
     
     func decode(data: [UInt8]) {
@@ -164,13 +160,15 @@ class WriteSingleCoilResponse :ModbusResponse {
 
         :param data: The packet data to decode
         */
-        self.transaction_id  = Int(Utilities.fromByteArray(Array(data[0...1]),   UInt16.self, byteOrder: .BigEndian))
-        self.protocol_id     = Int(Utilities.fromByteArray(Array(data[2...3]),   UInt16.self, byteOrder: .BigEndian))
-        self._rtu_frame_size      = Int(Utilities.fromByteArray(Array(data[4...5]),   UInt16.self, byteOrder: .BigEndian))
-        self.unit_id         = Int(Utilities.fromByteArray(Array(data[6...6]),   UInt8.self, byteOrder: .BigEndian))
-        self.function_code   = Int(Utilities.fromByteArray(Array(data[7...7]),   UInt8.self, byteOrder: .BigEndian))
-        self.address         = Int(Utilities.fromByteArray(Array(data[8...9]),   UInt16.self, byteOrder: .BigEndian))
-        let valueAsInt      = Int(Utilities.fromByteArray(Array(data[10...11]), UInt16.self, byteOrder: .BigEndian))
+        let framer = ByteArray(data: data)
+        
+        super.decode(framer: framer)
+    
+        let function_code    = framer.readBytes(begin: 7, end: 7)
+        if (function_code != self.function_code){print("ERROR");return}
+        
+        self.address         = framer.readBytes(begin: 8, end: 9)
+        let valueAsInt       = framer.readBytes(begin: 10, end: 11)
         
         value = (valueAsInt == ModbusStatus.shared.On) ? true : false
     }

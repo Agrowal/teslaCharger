@@ -44,13 +44,15 @@ class ModbusPDU {
     
     var transaction_id  :Int
     var protocol_id     :Int
+    var _rtu_frame_size :Int
     var unit_id         :Int
     let check           :UInt16
     
-    init(transaction_id: Int = 1, protocol_id: Int = 0, unit_id: Int){
+    init(transaction_id: Int = 1, protocol_id: Int = 0, _rtu_frame_size :Int = 6, unit_id: Int){
         // Initializes the base data for a modbus request //
         self.transaction_id = transaction_id
         self.protocol_id = protocol_id
+        self._rtu_frame_size = _rtu_frame_size
         self.unit_id = unit_id
         self.check = 0x0000
     }
@@ -137,8 +139,23 @@ class ModbusResponse: ModbusPDU {
         
         super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
     }*/
+    
+    func decode(framer: ByteArray) {
+        /* Decodes a write coil response
+         
+         :param data: The packet data to decode
+         */
+        
+        self.transaction_id  = framer.readBytes(begin: 0, end: 1)
+        self.protocol_id     = framer.readBytes(begin: 2, end: 3)
+        self._rtu_frame_size = framer.readBytes(begin: 4, end: 5)
+        self.unit_id         = framer.readBytes(begin: 6, end: 6)
+        
+    }
+    
+    
 }
-/*
+
 //---------------------------------------------------------------------------#
 // Exception PDU's
 //---------------------------------------------------------------------------#
@@ -156,17 +173,18 @@ class ModbusExceptions {
     let GatewayPathUnavailable  = 0x0A
     let GatewayNoResponse       = 0x0B
 
-    static func decode(cls, code){
+    static func decode(){
         /* Given an error code, translate it to a
         string error name.
 
         :param code: The code number to translate
         */
-        values = dict((v, k) for k, v in cls.__dict__.iteritems()
-        if not k.startswith('__') and not callable(v))
-        return values.get(code, None)
+        //values = dict((v, k) for k, v in cls.__dict__.iteritems()
+        //if not k.startswith('__') and not callable(v))
+        //return values.get(code, None)
     }
-
+}
+/*
 class ExceptionResponse: ModbusResponse{
     /* Base class for a modbus exception PDU */
     let ExceptionOffset = 0x80
