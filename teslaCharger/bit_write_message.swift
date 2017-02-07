@@ -27,12 +27,8 @@ class WriteSingleCoilRequest: ModbusRequest {
     will not affect the coil.
     */
     let function_code = 5
-    let _rtu_frame_size = 6
-    
     var address :Int
     var value :Bool
-    
-    var aduFramer = ByteArray()
 
     init (address: Int = 0, value: Bool = false, unit_id: Int) {
         /* Initializes a new instance
@@ -43,6 +39,8 @@ class WriteSingleCoilRequest: ModbusRequest {
         self.address = address
         self.value = Bool(value)
         super.init(unit_id: unit_id)
+        
+        self._rtu_frame_size = 6
 
     }
 
@@ -51,31 +49,20 @@ class WriteSingleCoilRequest: ModbusRequest {
 
         :returns: The byte encoded message
         */
-       
         let modbusValue = (self.value) ? ModbusStatus.shared.On : ModbusStatus.shared.Off
-        
-        aduFramer.removeAll()
-        
-        //MBAP
-        aduFramer.append(value: transaction_id, byteCount: .Two)
-        aduFramer.append(value: protocol_id,    byteCount: .Two)
-        aduFramer.append(value: _rtu_frame_size,byteCount: .Two)
-        aduFramer.append(value: unit_id,        byteCount: .One)
+        super.encode()
 
         //PDU
-        aduFramer.append(value: function_code,  byteCount: .One)
-        aduFramer.append(value: address,        byteCount: .Two)
-        aduFramer.append(value: modbusValue,    byteCount: .Two)
-        
+        frame.writeFrame(value: function_code,  byteCount: .One)
+        frame.writeFrame(value: address,        byteCount: .Two)
+        frame.writeFrame(value: modbusValue,    byteCount: .Two)
     }
 
-    override func decode(data: Data) {
+    override func decode() {
         /* Decodes a write coil request
 
         :param data: The packet data to decode
         */
-        
-        
     }
 
     func execute(client: TCPClient) throws -> WriteSingleCoilResponse {
@@ -86,19 +73,16 @@ class WriteSingleCoilRequest: ModbusRequest {
         */
         
         encode()
-        
-        switch client.send(data: aduFramer.getFrame()) {
+        switch client.send(data: frame.getFrame()) {
         case .success:
-            guard let data = client.read(1024*10, timeout: 5) else { break}
-            print(data)
-            return WriteSingleCoilResponse(data: data)
+            guard let readBuffer = client.read(1024*10, timeout: 5) else { break}
+            print(readBuffer)
+            return WriteSingleCoilResponse(buffer: readBuffer)
             
         case .failure(let error):
             throw ConnectionException()
         }
-        
         abort()
-        
     }
         
     func __str__() -> String  {
@@ -115,10 +99,9 @@ class WriteSingleCoilResponse :ModbusResponse {
     state has been written.
     */
     var function_code = 5
-    var _rtu_frame_size = 6
     
-    var address :Int
-    var value :Bool
+    var address :Int?
+    var value :Bool?
 
     init (transaction_id: Int, protocol_id: Int, unit_id: Int, address: Int = 0, value: Bool = false) {
         /* Initializes a new instance
@@ -130,21 +113,19 @@ class WriteSingleCoilResponse :ModbusResponse {
         self.value = value
         
         super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id)
+        
+        self._rtu_frame_size = 6
     }
     
-    init (data: [UInt8]) {
-        /* Initlialize values to satisfy compiler
-        :param adress
-        :param value
-        :param unit_id
-         are dummy data
+    init (buffer: [UInt8]) {
+        /* Initlialize values from buffer
         */
         
-        address = 0
-        value = false
-        super.init(unit_id: 1)
+        super.init()
+        frame.setFrame(data: buffer)
+        if hasErrorCode() {print("error"); abort()}
+        decode()
         
-        decode(data: data)
     }
     
     override func encode() {
@@ -155,20 +136,19 @@ class WriteSingleCoilResponse :ModbusResponse {
         print("NOT IMPLEMENTED!!!")
     }
     
-    func decode(data: [UInt8]) {
+    override func decode() {
         /* Decodes a write coil response
 
         :param data: The packet data to decode
         */
-        let framer = ByteArray(data: data)
         
-        super.decode(framer: framer)
+        super.decode()
     
-        let function_code    = framer.readBytes(begin: 7, end: 7)
-        if (function_code != self.function_code){print("ERROR");return}
+        let function_code    = frame.readFrame(begin: 7, end: 7)
+        if (function_code   != self.function_code){print("ERROR");return}
         
-        self.address         = framer.readBytes(begin: 8, end: 9)
-        let valueAsInt       = framer.readBytes(begin: 10, end: 11)
+        self.address         = frame.readFrame(begin: 8, end: 9)
+        let valueAsInt       = frame.readFrame(begin: 10, end: 11)
         
         value = (valueAsInt == ModbusStatus.shared.On) ? true : false
     }

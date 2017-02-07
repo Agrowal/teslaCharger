@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2224B841E4A7CB0008B0EAF /* frameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2224B831E4A7CB0008B0EAF /* frameHandler.swift */; };
 		A22335B81E37FCC8007298E1 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22335B31E37FCC8007298E1 /* utilities.swift */; };
 		A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AC1E3003C60003669B /* AppDelegate.swift */; };
 		A223D9AF1E3003C60003669B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223D9AE1E3003C60003669B /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2224B831E4A7CB0008B0EAF /* frameHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = frameHandler.swift; sourceTree = "<group>"; };
 		A22335B31E37FCC8007298E1 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = teslaCharger/Modbus/utilities.swift; sourceTree = "<group>"; };
 		A223D9A91E3003C60003669B /* teslaCharger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teslaCharger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A223D9AC1E3003C60003669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A26EDE941E43261300A3C87D /* exceptions.swift */,
 				A26EDE961E432CEA00A3C87D /* constants.swift */,
 				A22335B31E37FCC8007298E1 /* utilities.swift */,
+				A2224B831E4A7CB0008B0EAF /* frameHandler.swift */,
 			);
 			name = Modbus2;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				A2E530A11E3B830E000898A6 /* pdu.swift in Sources */,
 				A223D9AD1E3003C60003669B /* AppDelegate.swift in Sources */,
 				A2AC21C41E3B6DA200A59667 /* UDPClient.swift in Sources */,
+				A2224B841E4A7CB0008B0EAF /* frameHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

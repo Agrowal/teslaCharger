@@ -42,11 +42,15 @@ class ModbusPDU {
     
     */
     
-    var transaction_id  :Int
-    var protocol_id     :Int
-    var _rtu_frame_size :Int
-    var unit_id         :Int
-    let check           :UInt16
+    let frame = frameHandler()
+    
+    var transaction_id  :Int?
+    var protocol_id     :Int?
+    var _rtu_frame_size :Int?
+    var unit_id         :Int?
+    var check           :UInt16?
+    
+    init() {}
     
     init(transaction_id: Int = 1, protocol_id: Int = 0, _rtu_frame_size :Int = 6, unit_id: Int){
         // Initializes the base data for a modbus request //
@@ -57,23 +61,27 @@ class ModbusPDU {
         self.check = 0x0000
     }
     
-    func encode() throws {
-        /* Encodes the message
+    func encode()  {
+        /* Encodes the message MBAP header
+         */
         
-        :raises: A not implemented exception
-        */
-    
-        throw NotImplementedException()
+        frame.resetFrame()
+        
+        //MBAP
+        frame.writeFrame(value: transaction_id!, byteCount: .Two)
+        frame.writeFrame(value: protocol_id!,    byteCount: .Two)
+        frame.writeFrame(value: _rtu_frame_size!,byteCount: .Two)
+        frame.writeFrame(value: unit_id!,        byteCount: .One)
     }
         
-    func decode(data: Data) throws {
-        /* Decodes data part of the message.
+    func decode() {
+        /* Decodes the message MBAP header
+         */
         
-        :param data: is a string object
-        :raises: A not implemented exception
-        */
-        
-        throw NotImplementedException()
+        self.transaction_id  = frame.readFrame(begin: 0, end: 1)
+        self.protocol_id     = frame.readFrame(begin: 2, end: 3)
+        self._rtu_frame_size = frame.readFrame(begin: 4, end: 5)
+        self.unit_id         = frame.readFrame(begin: 6, end: 6)
     }
 
     static func calculateRtuFrameSize(buffer: Data){
@@ -81,29 +89,14 @@ class ModbusPDU {
 
         :param buffer: A buffer containing the data that have been received.
         :returns: The number of bytes in the PDU.
-         
- 
-        if hasattr(cls, '_rtu_frame_size'){
-            return cls._rtu_frame_size
-        }
-        elif hasattr(cls, '_rtu_byte_count_pos'){
-            return rtuFrameSize(buffer, cls._rtu_byte_count_pos)
-        }
-        else {
-            raise NotImplementedException("Cannot determine RTU frame size for %s" % cls.__name__)
-        }*/
+         */
+
         return
     }
 }
 
 class ModbusRequest: ModbusPDU {
     // Base class for a modbus request PDU //
-
-    /*override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
-        // Proxy to the lower level initializer //
-        
-        super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id)
-    }*/
 
     func doException(exception: String){
         /* Builds an error response based on the function
@@ -133,24 +126,17 @@ class ModbusResponse: ModbusPDU {
     */
 
     let should_respond = true
-
-   /* override init(transaction_id: Int, protocol_id: Int, unit_id: Int, skip_encode :Bool){
-        // Proxy to the lower level initializer //
-        
-        super.init(transaction_id: transaction_id, protocol_id: protocol_id, unit_id: unit_id, skip_encode: skip_encode)
-    }*/
     
-    func decode(framer: ByteArray) {
-        /* Decodes a write coil response
-         
-         :param data: The packet data to decode
+    func hasErrorCode() -> Bool {
+        /* All error function codes have 1 for their most significant bit - 1 0 0 0 = 128
          */
         
-        self.transaction_id  = framer.readBytes(begin: 0, end: 1)
-        self.protocol_id     = framer.readBytes(begin: 2, end: 3)
-        self._rtu_frame_size = framer.readBytes(begin: 4, end: 5)
-        self.unit_id         = framer.readBytes(begin: 6, end: 6)
-        
+        if frame.readFrame(begin: 7, end: 7) > 128 {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
     

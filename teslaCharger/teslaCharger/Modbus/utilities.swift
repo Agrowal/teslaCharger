@@ -29,65 +29,6 @@ class Utilities{
         return bytes.withUnsafeBytes {$0.baseAddress!.load(as: T.self)}
     }
     
- /*   static func toInt(array: [UInt8]) -> Int {
-        let array = array
-        let bigEndianValue = array.withUnsafeBufferPointer{$0.baseAddress!.withMemoryRebound(to: UInt, capacity: <#T##Int#>, <#T##body: (UnsafePointer<T>) throws -> Result##(UnsafePointer<T>) throws -> Result#>)}
-    }*/
 }
 
-class ByteArray {
-    var bytes :[UInt8]
-    
-    init(data: [UInt8] = []){
-        self.bytes = data
-    }
-    
-    enum ByteCount {
-        case One
-        case Two
-    }
-    
-    func append (value: Int, byteCount: ByteCount ) {
-        if byteCount == .One {
-            let convertedValue = Utilities.toByteArray(UInt8(value), byteOrder: .BigEndian)
-            bytes.append(contentsOf: convertedValue)
-        }
-        else if byteCount == .Two {
-            let convertedValue = Utilities.toByteArray(UInt16(value), byteOrder: .BigEndian)
-            bytes.append(contentsOf: convertedValue)
-        }
-        else{
-            print("ERROR")
-        }
-    }
-    
-    func readBytes(begin: Int, end: Int) -> Int {
-        let arraySlice = Array(bytes[begin...end])
-        let byteCount = arraySlice.count
-        switch byteCount {
-        case 1:
-            // One byte
-            return Int(Utilities.fromByteArray(arraySlice, UInt8.self, byteOrder: .BigEndian))
-        case 2:
-            // Two bytes
-            return Int(Utilities.fromByteArray(arraySlice, UInt16.self, byteOrder: .BigEndian))
-        default:
-            return Int(Utilities.fromByteArray(arraySlice, UInt8.self, byteOrder: .BigEndian))
-        }
-        
-    }
-    
-    func append(value: [UInt8]) {
-        bytes.append(contentsOf: value)
-    }
-    
-    func removeAll() {
-        bytes.removeAll()
-    }
-    
-    func getFrame() -> [UInt8] {
-        return bytes
-    }
-    
-    
-}
+
