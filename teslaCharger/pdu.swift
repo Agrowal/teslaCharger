@@ -84,21 +84,22 @@ class ModbusPDU {
         self.unit_id         = frame.readFrame(begin: 6, end: 6)
     }
 
-    static func calculateRtuFrameSize(buffer: Data){
+    static func calculateRtuFrameSize(buffer: Data) -> Int {
         /* Calculates the size of a PDU.
 
         :param buffer: A buffer containing the data that have been received.
         :returns: The number of bytes in the PDU.
          */
         let bufferLength = buffer.count
-        return frameSize = bufferLength - 6
+        let frameSize = bufferLength - 6
+        return frameSize
     }
 }
 
 class ModbusRequest: ModbusPDU {
     // Base class for a modbus request PDU //
 
-    func doException(exception: String){
+    func doException(_ exception: String){
         /* Builds an error response based on the function
 
         :param exception: The exception to return
@@ -139,6 +140,18 @@ class ModbusResponse: ModbusPDU {
         }
     }
     
+    func doException(_ exception: String){
+        /* Builds an error response based on the function
+         
+         :param exception: The exception to return
+         :raises: An exception response
+         */
+        
+        //_logger.error("Exception Response F\(self.function_code) E\(exception)")
+        //return ExceptionResponse(self.function_code, exception)
+        print(exception)
+    }
+    
     
 }
 
@@ -149,6 +162,18 @@ class ModbusExceptions {
     /*
     An enumeration of the valid modbus exceptions
     */
+    static let exceptions : [Int:String] = [
+        1  : "IllegalFunction"        ,
+        2  : "IllegalAddress"         ,
+        3  : "IllegalValue"           ,
+        4  : "SlaveFailure"           ,
+        5  : "Acknowledge"            ,
+        6  : "SlaveBusy"              ,
+        8  : "MemoryParityError"      ,
+        10 : "GatewayPathUnavailable" ,
+        11 : "GatewayNoResponse"
+    ]
+    
     let IllegalFunction         = 0x01
     let IllegalAddress          = 0x02
     let IllegalValue            = 0x03
@@ -159,24 +184,28 @@ class ModbusExceptions {
     let GatewayPathUnavailable  = 0x0A
     let GatewayNoResponse       = 0x0B
 
-    static func decode(){
+    static func decode(_ errorCode: Int) -> String {
         /* Given an error code, translate it to a
         string error name.
 
         :param code: The code number to translate
         */
-        //values = dict((v, k) for k, v in cls.__dict__.iteritems()
-        //if not k.startswith('__') and not callable(v))
-        //return values.get(code, None)
+        if exceptions[errorCode] != nil {
+            return exceptions[errorCode]!
+        }
+        return "WRONG CODE"
     }
 }
-/*
+
 class ExceptionResponse: ModbusResponse{
     /* Base class for a modbus exception PDU */
     let ExceptionOffset = 0x80
-    let _rtu_frame_size = 5
+    var _rtu_frame_size = 5
+    
+    var original_code :Int
+    var exception_code :Int
 
-    init(function_code, exception_code=None, **kwargs){
+    init(function_code: Int, exception_code: Int = nil){
         /* Initializes the modbus exception response
 
         :param function_code: The function to build an exception response for
@@ -188,12 +217,12 @@ class ExceptionResponse: ModbusResponse{
         self.exception_code = exception_code
     }
     
-    func encode(){
+    func encode() -> UInt8 {
         /* Encodes a modbus exception response
 
-        :returns: The encoded exception packet
+        :returns: The encoded exc eption packet
         */
-        return chr(self.exception_code)
+        return UInt8(self.exception_code)
     }
     
     func decode(data){
@@ -204,7 +233,7 @@ class ExceptionResponse: ModbusResponse{
         self.exception_code = ord(data[0])
     }
     
-    func __str__(){
+    func __str__() -> String {
         /* Builds a representation of an exception response
 
         :returns: The string representation of an exception response
@@ -214,7 +243,7 @@ class ExceptionResponse: ModbusResponse{
         return "Exception Response\(parameters)"
     }
 }
-
+/*
 class IllegalFunctionRequest: ModbusRequest {
     /*
     Defines the Modbus slave exception type 'Illegal Function'

@@ -123,9 +123,14 @@ class WriteSingleCoilResponse :ModbusResponse {
         
         super.init()
         frame.setFrame(data: buffer)
-        if hasErrorCode() {print("error"); abort()}
-        decode()
-        
+        if hasErrorCode() {
+            let errorCode = frame.readFrame(begin: 8, end: 8)
+            let exception = ModbusExceptions.decode(errorCode)
+            doException(exception)
+        }
+        else {
+            decode()
+        }
     }
     
     override func encode() {
